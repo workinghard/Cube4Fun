@@ -12,9 +12,15 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var windowToolbox: NSWindow!
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+    }
+    
+    func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
+        CubeNetworkObj.closeConnection()
+        return NSApplicationTerminateReply.TerminateNow
     }
     
 }

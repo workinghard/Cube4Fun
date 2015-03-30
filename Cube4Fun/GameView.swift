@@ -19,6 +19,9 @@ class GameView: SCNView {
         lastMousePos = theEvent.locationInWindow
         /* Called when a mouse click occurs */
         
+        var ledPressed: Int = 0;
+        var ledColorOn = false;
+        
         // check what nodes are clicked
         let p = self.convertPoint(theEvent.locationInWindow, fromView: nil)
         if let hitResults = self.hitTest(p, options: nil) {
@@ -36,7 +39,19 @@ class GameView: SCNView {
                     if let geom = node.geometry {
                         if let name:NSString = geom.name {
                             let myGeometry:SCNText = self.scene!.rootNode.childNodeWithName("myDescr", recursively: true)?.geometry as SCNText
+                            // Show touched led
                             myGeometry.string = name
+                            // Check for previously color
+                            let prevColor = geom.firstMaterial?.diffuse.contents as NSColor
+                            if prevColor != NSColor.grayColor() {
+                                geom.firstMaterial?.diffuse.contents  = NSColor.grayColor()
+                                ledColorOn = false
+                            }else{
+                                geom.firstMaterial?.diffuse.contents = NSColor(calibratedHue: (10/255), saturation: 1.0, brightness: 1.0, alpha: 1.0)
+                                ledColorOn = true
+                            }
+                            ledPressed = Int(name.intValue)
+                            
                         }
                     }
                 }
@@ -92,6 +107,16 @@ class GameView: SCNView {
                     material.emission.contents = NSColor.whiteColor()
                 
                     SCNTransaction.commit()
+                    
+                    // Update the LED frame
+                    var myByte: [Byte]
+                    if ledColorOn {
+                        myByte = [10]
+                    }else{
+                        myByte = [255]  // Off
+                    }
+                    myFrames.replaceBytesInRange(NSMakeRange(ledPressed, 1), withBytes: myByte)
+                    
                 }
             }
         }
@@ -131,8 +156,6 @@ class GameView: SCNView {
     }
     
     override func keyDown(theEvent: NSEvent) {
-        
-        //let myCamera:SCNNode = self.scene!.rootNode.childNodeWithName("Camera", recursively: true)!
 
         switch (theEvent.keyCode) {
         case 123:
@@ -144,14 +167,28 @@ class GameView: SCNView {
             //self.rotateByAngle(-1.0);
             //right
             break;
-        case 15:
-            // Reset the cube
+        case 15: // r - Key
+            // Reset the cube position
             self.rotateCamera(0.0, y: -startAngle)
+            break;
+        case 17: // t - Key
+            // Reset the frame color on the Cube
+            myFrames.replaceBytesInRange(NSMakeRange(myFrameCount-1, 64), withBytes: emptyFrame)
+            
+            // Reset the frame color in 3D
+            if let rootNode = self.scene?.rootNode {
+                if let cubeNode = rootNode.childNodeWithName("cubeNode", recursively: true) {
+                    for myLED in cubeNode.childNodes {
+                        //myLED.firstMaterial?.diffuse.contents  = NSColor.grayColor()
+                    }
+                }
+            }
         default:
             super.keyDown(theEvent)
         }
         
         println(theEvent.keyCode);
+        
         
         //super.keyDown(theEvent)
     }

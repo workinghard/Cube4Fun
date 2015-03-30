@@ -9,11 +9,53 @@
 import SceneKit
 import QuartzCore
 
+var myFrameCount: UInt32 = 0;
+var myFrames: NSMutableData = NSMutableData()
+
+
+let emptyFrame: [Byte] = [
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255,
+    255,255,255,255]
+
 class GameViewController: NSViewController {
     
     @IBOutlet weak var gameView: GameView!
     
+    
+    func sendFrame() {
+        //let string = UnsafePointer<UInt8>(myFrames.bytes)
+        CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
+    }
+    
     override func awakeFromNib(){
+
+        //NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(5), invocation: CubeNetworkObj.initObjects(), repeats: true)
+//        CubeNetworkObj.initObjects();
+        
+        // Init first frame
+        myFrames = NSMutableData(bytes: emptyFrame, length: 64)
+        myFrameCount = 1
+        // Open connection to the LED cube
+        CubeNetworkObj.openConnection()
+
+        NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
+        
+     
+        
         // create a new scene
         //let scene = SCNScene(named: "art.scnassets/ship.dae")!
         let scene = PrimitivesScene();
@@ -22,7 +64,7 @@ class GameViewController: NSViewController {
         // create and add a camera to the scene
         let camera = SCNCamera()
         camera.usesOrthographicProjection = true
-        camera.orthographicScale = 11
+        camera.orthographicScale = 15
         camera.zNear = 0
         camera.zFar = 100
         let cameraNode = SCNNode()
@@ -86,6 +128,7 @@ class GameViewController: NSViewController {
         ship.addAnimation(animation, forKey: nil)
         */
 
+        
         // set the scene to the view
         self.gameView!.scene = scene
         
