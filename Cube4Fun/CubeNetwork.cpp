@@ -184,19 +184,20 @@ void CubeNetwork::updateFrame() {
 void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int frameCount) {
     // check for empty pointer
     if ( frameSequence != NULL ) {
-        for (int frame = 0; frame<frameCount;frame++) {
+        //for (startFrame = 0; startFrame<lastByte;startFrame++) {
             for (i=0;i<64;i++) {
                 // Fill buffer
-                buffer3D[i] = frameSequence[i+(frame*64)];
+                buffer3D[i] = frameSequence[i+((frameCount-1)*64)];
             }
             // Send the frame
             ds.sendBytes(buffer3D, 64);
-        }
+        //}
     }
 }
 
 void CubeNetwork::openConnection() {
     try {
+        printf("Try open the connection\n");
         ds.connect(SocketAddress("192.168.1.79", 8081));
         fillBufferWithMsg();
         ds.sendBytes(buffer3D, 9);

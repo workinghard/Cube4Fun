@@ -9,7 +9,8 @@
 import SceneKit
 import QuartzCore
 
-var myFrameCount: UInt32 = 0;
+var myFrameCount: UInt32 = 1;
+var myMaxFrameCount: UInt32 = 1;
 var myFrames: NSMutableData = NSMutableData()
 
 
@@ -31,29 +32,81 @@ let emptyFrame: [Byte] = [
     255,255,255,255,
     255,255,255,255]
 
-class GameViewController: NSViewController {
+var _previousUpdateTime: NSTimeInterval = NSTimeInterval()
+var _deltaTime: NSTimeInterval = NSTimeInterval()
+let _minSendDelay: NSTimeInterval = 0.200 // 200 milliseconds
+let _frameSendDelay: NSTimeInterval = 0.2 // one second
+var _playSendDelay: NSTimeInterval = 0.5 // 500 milliseconds as default
+var _playAllFrames = false
+
+class GameViewController: NSViewController { // SCNSceneRendererDelegate
     
     @IBOutlet weak var gameView: GameView!
+
     
+    /*
+    func renderer(aRenderer: SCNSceneRenderer, updateAtTime time: NSTimeInterval) {
+        //sendFrame(time)
+        sendFrame(NSDate.timeIntervalSinceReferenceDate())
+        //println("This will be called before each frame draw")
+    }
+
+    override func viewDidLoad() {
+        self.gameView!.delegate = self
+        
+        super.viewDidLoad()
+    }
+    */
     
     func sendFrame() {
-        //let string = UnsafePointer<UInt8>(myFrames.bytes)
-        CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
+        sendFrame(NSDate.timeIntervalSinceReferenceDate())
+    }
+    
+    func sendFrame(time: NSTimeInterval) {
+        //println(time)
+        
+        if (_previousUpdateTime == 0.0) {
+            _previousUpdateTime = time;
+        }
+        _deltaTime = time - _previousUpdateTime;
+        
+        //var ms = Int((time % 1) * 1000)
+        if ( _playAllFrames ) {
+            if ( _deltaTime >= _playSendDelay ){
+                if myFrameCount >= myMaxFrameCount {
+                    self.gameView!.firstButtonPressed()
+                }else{
+                    self.gameView!.nextButtonPressed()
+                }
+                CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
+                _previousUpdateTime = time;
+            }
+        }else{
+            if ( _deltaTime >= _minSendDelay ) {
+                CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
+                //println("SendFrame: \(_deltaTime)")
+                _previousUpdateTime = time;
+            }
+        }    
+        //CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
     }
     
     override func awakeFromNib(){
 
-        //NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(5), invocation: CubeNetworkObj.initObjects(), repeats: true)
+        //NSTimer.scheduledTimerWithTimeInterval(_frameSendDelay, invocation: CubeNetworkObj.initObjects(), repeats: true)
 //        CubeNetworkObj.initObjects();
         
         // Init first frame
+        
         myFrames = NSMutableData(bytes: emptyFrame, length: 64)
         myFrameCount = 1
         // Open connection to the LED cube
         CubeNetworkObj.openConnection()
 
-        NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
+        // Fallback timer if nothing render at the moment
+        NSTimer.scheduledTimerWithTimeInterval(_frameSendDelay, target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
         
+
      
         
         // create a new scene
@@ -115,6 +168,9 @@ class GameViewController: NSViewController {
         scene.rootNode.addChildNode(ambientLightNode)
   
         
+        // Background image
+        scene.background.contents = NSImage(named: "Background.jpg")
+        
         
         /*
         // retrieve the ship node
@@ -128,15 +184,17 @@ class GameViewController: NSViewController {
         ship.addAnimation(animation, forKey: nil)
         */
 
+        scene.paused = false
         
         // set the scene to the view
         self.gameView!.scene = scene
         
+
         // allows the user to manipulate the camera
         //self.gameView!.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-        self.gameView!.showsStatistics = true
+        //self.gameView!.showsStatistics = true
         
         // configure the view
         self.gameView!.backgroundColor = NSColor.blackColor()

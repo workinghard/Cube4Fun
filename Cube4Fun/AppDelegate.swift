@@ -12,7 +12,10 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var windowToolbox: NSWindow!
+    @IBOutlet weak var projectWindow: NSWindow!
+   
+    
+    @IBOutlet weak var closeButton: NSButton!
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
@@ -22,5 +25,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         CubeNetworkObj.closeConnection()
         return NSApplicationTerminateReply.TerminateNow
     }
+    
+    @IBAction func closeButtonClicked(sender: AnyObject ) {
+        projectWindow.close()
+    }
+    
     
 }
