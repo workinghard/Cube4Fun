@@ -8,26 +8,22 @@
 
 import Cocoa
 
+var _animationsWindow: NSWindow = NSWindow()
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var projectWindow: NSWindow!
-   
-    
-    @IBOutlet weak var closeButton: NSButton!
+    @IBOutlet weak var animationsWindow: NSWindow!
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        _animationsWindow = animationsWindow
     }
     
     func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
         CubeNetworkObj.closeConnection()
         return NSApplicationTerminateReply.TerminateNow
-    }
-    
-    @IBAction func closeButtonClicked(sender: AnyObject ) {
-        projectWindow.close()
     }
     
     

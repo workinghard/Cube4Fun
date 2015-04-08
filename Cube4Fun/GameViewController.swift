@@ -9,10 +9,11 @@
 import SceneKit
 import QuartzCore
 
+
 var myFrameCount: UInt32 = 1;
 var myMaxFrameCount: UInt32 = 1;
-var myFrames: NSMutableData = NSMutableData()
-
+var myFrames: NSMutableData = NSMutableData() // == byte[] array
+var _emptyAnimation: NSMutableDictionary = ["AnimName": "Animation1", "AnimKey": "1=anim1", "AnimDur": 1, "AnimSpeed": 500, "AnimFrames": 1, "AnimData": myFrames]
 
 let emptyFrame: [Byte] = [
     255,255,255,255,

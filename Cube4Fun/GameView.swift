@@ -204,6 +204,36 @@ class GameView: SCNView {
         updateButtonVisibility()
     }
     
+    func plusSpeedButtonPressed() {
+        if ( _playSendDelay <= 3 ) { // 3 seconds slowest fps
+            _playSendDelay = _playSendDelay + 0.1
+            updateSpeedText()
+        }
+    }
+    
+    func minusSpeedButtonPressed() {
+        println(_playSendDelay)
+        if ( _playSendDelay > 0.2 ) { //  100ms fastest fps
+            _playSendDelay = _playSendDelay - 0.1
+            updateSpeedText()
+        }
+    }
+    
+    func updateSpeedText() {
+        if let rootNode = self.scene?.rootNode {
+            for childNode in rootNode.childNodes {
+                let buttonNode: SCNNode = childNode as SCNNode
+                if buttonNode.name == "mySpeedText" {
+                    let geometry:SCNText = buttonNode.geometry as SCNText
+                    geometry.string = "Speed: \(Int(_playSendDelay*1000)) ms"
+                }
+                
+            }
+        }
+
+    }
+    
+    
     func playButtonPressed() {
         // Change the button from Play to Pause
         let myPauseButtonNode: SCNNode = self.scene!.rootNode.childNodeWithName("myPauseButton", recursively: true)!
@@ -226,6 +256,10 @@ class GameView: SCNView {
         _playAllFrames = false
     }
     
+    func openAnimationWindow() {
+        _animationsWindow.setIsVisible(true)
+        
+    }
     
     override func rightMouseDown(theEvent: NSEvent) {
         let p = self.convertPoint(theEvent.locationInWindow, fromView: nil)
@@ -305,6 +339,15 @@ class GameView: SCNView {
                     }
                     if clickedNode.name == "myLastFrameButton" {
                         lastButtonPressed()
+                    }
+                    if clickedNode.name == "myPlusSpeedButton" {
+                        plusSpeedButtonPressed()
+                    }
+                    if clickedNode.name == "myMinusSpeedButton" {
+                        minusSpeedButtonPressed()
+                    }
+                    if clickedNode.name == "myMngAnimationsButton" {
+                        openAnimationWindow()
                     }
                      if clickedNode.name == "myColorBar" || clickedNode.name == "myArrows" {
                         let colorInt = Int(round(relativeBarPosition - theEvent.locationInWindow.y))

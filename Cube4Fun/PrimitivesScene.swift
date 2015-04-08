@@ -80,6 +80,42 @@ class PrimitivesScene: SCNScene {
         }
         self.rootNode.addChildNode(lastFrameImageNode)
         
+    }
+    
+    func createSpeedButtons() {
+        // Frame
+        let textSpeed = SCNText(string: "Speed: \(Int(_playSendDelay*1000)) ms", extrusionDepth: 0)
+        textSpeed.font = NSFont(name: "Arial", size: 1.2)
+        let textSpeedNode = SCNNode(geometry: textSpeed)
+        textSpeedNode.name = "mySpeedText"
+        textSpeedNode.position = SCNVector3(x:-20.0 , y: 9.7, z: 0.0)
+        self.rootNode.addChildNode(textSpeedNode)
+        
+        // SpeedUp - Button
+        let plusSpeedImage = SCNPlane(width: 1.7, height: 1.7)
+        plusSpeedImage.firstMaterial?.diffuse.contents = NSImage(named: "list-add-2.png")
+        let plusSpeedImageNode = SCNNode(geometry: plusSpeedImage)
+        plusSpeedImageNode.name = "myPlusSpeedButton"
+        plusSpeedImageNode.position = SCNVector3(x:-16.5, y:8, z:0)
+        self.rootNode.addChildNode(plusSpeedImageNode)
+        
+        // SpeedDown - Button
+        let minusSpeedImage = SCNPlane(width: 1.7, height: 1.7)
+        minusSpeedImage.firstMaterial?.diffuse.contents = NSImage(named: "list-remove-2.png")
+        let minusSpeedImageNode = SCNNode(geometry: minusSpeedImage)
+        minusSpeedImageNode.name = "myMinusSpeedButton"
+        minusSpeedImageNode.position = SCNVector3(x:-18.7, y:8, z:0)
+        self.rootNode.addChildNode(minusSpeedImageNode)
+    }
+    
+    func createFrameButtons() {
+        let textFrame = SCNText(string: "Frame: \(myFrameCount)/\(myMaxFrameCount)", extrusionDepth: 0)
+        textFrame.font = NSFont(name: "Arial", size: 1.2)
+        let textFrameNode = SCNNode(geometry: textFrame)
+        textFrameNode.name = "myFrameText"
+        textFrameNode.position = SCNVector3(x:-20.0 , y: 13.7, z: 0.0)
+        self.rootNode.addChildNode(textFrameNode)
+        
         // AddFrame - Button
         let addFrameImage = SCNPlane(width: 1.7, height: 1.7)
         addFrameImage.firstMaterial?.diffuse.contents = NSImage(named: "list-add-2.png")
@@ -99,7 +135,23 @@ class PrimitivesScene: SCNScene {
             delFrameImageNode.hidden = true
         }
         self.rootNode.addChildNode(delFrameImageNode)
+    }
+    
+    func createOpenAnimations() {
+        let textAnimations = SCNText(string: "List Animations", extrusionDepth: 0)
+        textAnimations.font = NSFont(name: "Arial", size: 1.2)
+        let textAnimationsNode = SCNNode(geometry: textAnimations)
+        textAnimationsNode.name = "myAnimationsText"
+        textAnimationsNode.position = SCNVector3(x:-20.0 , y: 5.7, z: 0.0)
+        self.rootNode.addChildNode(textAnimationsNode)
         
+        // Manage Animations - Button
+        let mngAnimationsImage = SCNPlane(width: 1.7, height: 1.7)
+        mngAnimationsImage.firstMaterial?.diffuse.contents = NSImage(named: "view-sidetree.png")
+        let mngAnimationsImageNode = SCNNode(geometry: mngAnimationsImage)
+        mngAnimationsImageNode.name = "myMngAnimationsButton"
+        mngAnimationsImageNode.position = SCNVector3(x:-16.5, y:4, z:0)
+        self.rootNode.addChildNode(mngAnimationsImageNode)
     }
     
   override init() {
@@ -134,16 +186,16 @@ class PrimitivesScene: SCNScene {
     self.rootNode.addChildNode(textNode)
 
     // Frame
-    let textFrame = SCNText(string: "Frame: \(myFrameCount)/\(myMaxFrameCount)", extrusionDepth: 0)
-    textFrame.font = NSFont(name: "Arial", size: 1.2)
-    let textFrameNode = SCNNode(geometry: textFrame)
-    textFrameNode.name = "myFrameText"
-    textFrameNode.position = SCNVector3(x:-20.0 , y: 13.7, z: 0.0)
-    self.rootNode.addChildNode(textFrameNode)
-    
+    createFrameButtons()
     
     // Action Buttons
     createPlayback()
+    
+    // Speed Buttons
+    createSpeedButtons()
+    
+    // Open Animation Button
+    createOpenAnimations()
     
     // color picker
     let colorBar = SCNPlane(width: 3, height: 16)
