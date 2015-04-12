@@ -9,7 +9,6 @@
 import Cocoa
 import Foundation
 
-
 //let _emptyAnimation: NSMutableDictionary = ["AnimName": "Animation1", "AnimKey": "1=anim1", "AnimDur": 1, "AnimSpeed": 500, "AnimFrames": 1]
 
 /*
@@ -21,48 +20,47 @@ var dataArray: [NSMutableDictionary] = [["AnimName": "Animation1", "AnimKey": "1
     ["AnimName": "Animation6", "AnimKey": "1=anim6", "AnimDur": 2, "AnimSpeed": 1000, "AnimFrames": 52]];
 */
 
-var _animationArray: [NSMutableDictionary] = [NSMutableDictionary]();
+//var _animationArray: [NSMutableDictionary] = [NSMutableDictionary]();
+//var _selectedAnimation: Int = 0;
 
 
 class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate {
 
     @IBOutlet weak var myTableView: NSTableView!
     
-    var _selectedRow: Int = -1
-    
-    override func awakeFromNib() {
-        _animationArray.append(_emptyAnimation)
-    }
-    
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        let numberOfRows:Int = _animationArray.count
+        let numberOfRows:Int = __animations.count() // _animationArray.count
         return numberOfRows
     }
     
     func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        //println("Display: \(row)")
-        let object: NSDictionary = _animationArray[row] as NSDictionary
+        //let object: NSDictionary = __animations.getAnimation(row) //_animationArray[row] as NSDictionary
         //println(object)
         let column: String = tableColumn?.identifier as String!
         if  column == "AnimName" {
-            let value = object.objectForKey(column) as String
-            return value
+            return __animations.getAnimationName(row)
+            //let value = object.objectForKey(column) as String
+            //return value
         }
         if column == "AnimKey" {
-            let value = object.objectForKey(column) as String
-            return value
+            return __animations.getAnimationKey(row)
+            //let value = object.objectForKey(column) as String
+            //return value
         }
         if column == "AnimDur" {
-            let value = object.objectForKey(column) as Int
-            return value
+            return __animations.getAnimationDuration(row)
+            //let value = object.objectForKey(column) as Int
+            //return value
         }
         if column == "AnimSpeed" {
-            let value = object.objectForKey(column) as Int
-            return value
+            return __animations.getAnimationSpeed(row)
+            //let value = object.objectForKey(column) as Int
+            //return value
         }
         if column == "AnimFrames" {
-            let value = object.objectForKey(column) as Int
-            return value
+            return __animations.getAnimationFrameCount(row)
+            //let value = object.objectForKey(column) as Int
+            //return value
         }
 
         return column
@@ -70,8 +68,15 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     
     
     func tableViewSelectionDidChange(notification: NSNotification) {
-        let view: NSTableView = notification.object as NSTableView
-        _selectedRow = view.selectedRow
+        let view: NSTableView = notification.object as! NSTableView
+        __animations.setSelectedAnimationID(view.selectedRow)
+       
+        _gameView.resetView()
+        //let myCubeController: GameViewController = _animationsWindow.contentViewController as! GameViewController
+        //let myCubeView: GameView = myCubeController.view as! GameView
+        //myCubeView.resetView()
+        
+        //_selectedAnimation = view.selectedRow
         
         //println("klicked \(view.selectedRow)")
     }
@@ -80,54 +85,54 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
         let column: String = tableColumn?.identifier as String!
         //println("Object: \(object) Key: \((tableColumn?.identifier)!)" )
 
-        let value = object! as NSString
+        let value = object! as! NSString
         if  column == "AnimName" {
-            _animationArray[row].setObject(value, forKey: (tableColumn?.identifier)!)
+            __animations.setAnimationName(row, value: value as String)
+            //_animationArray[row].setObject(value, forKey: (tableColumn?.identifier)!)
         }
         if column == "AnimKey" {
-            _animationArray[row].setObject(value, forKey: (tableColumn?.identifier)!)
+            __animations.setAnimationKey(row, value: value as String)
+            //_animationArray[row].setObject(value, forKey: (tableColumn?.identifier)!)
         }
         if column == "AnimDur" {
-            _animationArray[row].setObject(value.integerValue, forKey: (tableColumn?.identifier)!)
+            __animations.setAnimationDuration(row, value: value.integerValue)
+            //_animationArray[row].setObject(value.integerValue, forKey: (tableColumn?.identifier)!)
         }
         if column == "AnimSpeed" {
-            _animationArray[row].setObject(value.integerValue, forKey: (tableColumn?.identifier)!)
+            __animations.setAnimationSpeed(row, value: value.integerValue)
+            //_animationArray[row].setObject(value.integerValue, forKey: (tableColumn?.identifier)!)
         }
-        if column == "AnimFrames" {
-            _animationArray[row].setObject(value.integerValue, forKey: (tableColumn?.identifier)!)
-        }
+        
+        _gameView.resetView()
+        
+        //if column == "AnimFrames" {
+        //    _animationArray[row].setObject(value.integerValue, forKey: (tableColumn?.identifier)!)
+        //}
     }
     
     @IBAction func addNewAnimation(sender: AnyObject) {
-        _animationArray.append(_emptyAnimation)
+        __animations.addAnimation()
         myTableView.reloadData()
-  //      println("Adding new Item")
     }
     
     @IBAction func delNewAnimation(sender: AnyObject) {
-        if ( _selectedRow >= 0 ) {
-            _animationArray.removeAtIndex(_selectedRow)
-            myTableView.reloadData()
-        }
-//        println("Deleting selected Item")
+        __animations.deleteSelected()
+        myTableView.reloadData()
     }
     
     @IBAction func moveUpItem(send: AnyObject) {
-        if ( _selectedRow > 0 ) {
-            _animationArray.insert(_animationArray[_selectedRow], atIndex: _selectedRow-1)
-            _animationArray.removeAtIndex(_selectedRow+1)
+        if ( __animations.getSelectedAnimationID() > 0 ) {
+            __animations.moveUpSelected()
             myTableView.reloadData()
-            myTableView.selectRowIndexes(NSIndexSet(index: _selectedRow-1), byExtendingSelection: false)
-//            let save: NSMutableDictionary =  dataArray.
+            myTableView.selectRowIndexes(NSIndexSet(index: __animations.getSelectedAnimationID()-1), byExtendingSelection: false)
         }
     }
     
     @IBAction func moveDownItem(send: AnyObject) {
-        if (_selectedRow < _animationArray.count - 1) {
-            _animationArray.insert(_animationArray[_selectedRow+1], atIndex: _selectedRow)
-            _animationArray.removeAtIndex(_selectedRow+2)
+        if (__animations.getSelectedAnimationID() < __animations.count() - 1) {
+            __animations.moveDownSelected()
             myTableView.reloadData()
-            myTableView.selectRowIndexes(NSIndexSet(index: _selectedRow+1), byExtendingSelection: false)
+            myTableView.selectRowIndexes(NSIndexSet(index: __animations.getSelectedAnimationID()+1), byExtendingSelection: false)
         }
     }
     

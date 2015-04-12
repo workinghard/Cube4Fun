@@ -9,7 +9,7 @@
 import SceneKit
 import QuartzCore
 
-
+/*
 var myFrameCount: UInt32 = 1;
 var myMaxFrameCount: UInt32 = 1;
 var myFrames: NSMutableData = NSMutableData() // == byte[] array
@@ -33,12 +33,15 @@ let emptyFrame: [Byte] = [
     255,255,255,255,
     255,255,255,255]
 
-var _previousUpdateTime: NSTimeInterval = NSTimeInterval()
-var _deltaTime: NSTimeInterval = NSTimeInterval()
 let _minSendDelay: NSTimeInterval = 0.200 // 200 milliseconds
 let _frameSendDelay: NSTimeInterval = 0.2 // one second
 var _playSendDelay: NSTimeInterval = 0.5 // 500 milliseconds as default
+*/
+
+var _previousUpdateTime: NSTimeInterval = NSTimeInterval()
+var _deltaTime: NSTimeInterval = NSTimeInterval()
 var _playAllFrames = false
+var _gameView: GameView = GameView();
 
 class GameViewController: NSViewController { // SCNSceneRendererDelegate
     
@@ -73,18 +76,18 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
         
         //var ms = Int((time % 1) * 1000)
         if ( _playAllFrames ) {
-            if ( _deltaTime >= _playSendDelay ){
-                if myFrameCount >= myMaxFrameCount {
+            if ( _deltaTime >= __animations.animationSpeedFloat() ){
+                if (__animations.getAnimationFrameID() >= __animations.getAnimationFrameCount()) {
                     self.gameView!.firstButtonPressed()
                 }else{
                     self.gameView!.nextButtonPressed()
                 }
-                CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
+                CubeNetworkObj.updateFrame(__animations.getAnimData(), count: UInt32(__animations.getAnimationFrameID()))
                 _previousUpdateTime = time;
             }
         }else{
-            if ( _deltaTime >= _minSendDelay ) {
-                CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
+            if ( _deltaTime >= __animations.getMinSendDelay() ) {
+                CubeNetworkObj.updateFrame(__animations.getAnimData(), count: UInt32(__animations.getAnimationFrameID()))
                 //println("SendFrame: \(_deltaTime)")
                 _previousUpdateTime = time;
             }
@@ -94,18 +97,19 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
     
     override func awakeFromNib(){
 
+        _gameView = gameView;
         //NSTimer.scheduledTimerWithTimeInterval(_frameSendDelay, invocation: CubeNetworkObj.initObjects(), repeats: true)
 //        CubeNetworkObj.initObjects();
         
         // Init first frame
         
-        myFrames = NSMutableData(bytes: emptyFrame, length: 64)
-        myFrameCount = 1
+//        myFrames = NSMutableData(bytes: emptyFrame, length: 64)
+//        myFrameCount = 1
         // Open connection to the LED cube
         CubeNetworkObj.openConnection()
 
         // Fallback timer if nothing render at the moment
-        NSTimer.scheduledTimerWithTimeInterval(_frameSendDelay, target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(__animations.getMinSendDelay(), target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
         
 
      

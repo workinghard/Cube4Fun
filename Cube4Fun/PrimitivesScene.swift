@@ -31,7 +31,7 @@ class PrimitivesScene: SCNScene {
         pauseImageNode.name = "myPauseButton"
         pauseImageNode.position = SCNVector3(x:0, y:14, z:0)
         pauseImageNode.hidden = true
-        if myFrameCount == 1 && myMaxFrameCount == 1 {
+        if __animations.getAnimationFrameID() == 1 && __animations.getAnimationFrameCount() == 1 {
             pauseImageNode.hidden = true
         }
         self.rootNode.addChildNode(pauseImageNode)
@@ -42,7 +42,7 @@ class PrimitivesScene: SCNScene {
         let nextFrameImageNode = SCNNode(geometry: nextFrameImage)
         nextFrameImageNode.name = "myNextFrameButton"
         nextFrameImageNode.position = SCNVector3(x:2, y:14, z:0)
-        if myFrameCount == 1 && myMaxFrameCount == 1 {
+        if __animations.getAnimationFrameID() == 1 && __animations.getAnimationFrameCount() == 1 {
             nextFrameImageNode.hidden = true
         }
         self.rootNode.addChildNode(nextFrameImageNode)
@@ -53,7 +53,7 @@ class PrimitivesScene: SCNScene {
         let prevFrameImageNode = SCNNode(geometry: prevFrameImage)
         prevFrameImageNode.name = "myPrevFrameButton"
         prevFrameImageNode.position = SCNVector3(x:-2, y:14, z:0)
-        if myFrameCount == 1 {
+        if __animations.getAnimationFrameID() == 1 {
             prevFrameImageNode.hidden = true
         }
         self.rootNode.addChildNode(prevFrameImageNode)
@@ -64,7 +64,7 @@ class PrimitivesScene: SCNScene {
         let startFrameImageNode = SCNNode(geometry: startFrameImage)
         startFrameImageNode.name = "myStartFrameButton"
         startFrameImageNode.position = SCNVector3(x:-5, y:14, z:0)
-        if myFrameCount == 1 {
+        if __animations.getAnimationFrameID() == 1 {
             startFrameImageNode.hidden = true
         }
         self.rootNode.addChildNode(startFrameImageNode)
@@ -75,7 +75,7 @@ class PrimitivesScene: SCNScene {
         let lastFrameImageNode = SCNNode(geometry: lastFrameImage)
         lastFrameImageNode.name = "myLastFrameButton"
         lastFrameImageNode.position = SCNVector3(x:5, y:14, z:0)
-        if myFrameCount == myMaxFrameCount {
+        if __animations.getAnimationFrameID() == __animations.getAnimationFrameCount() {
             lastFrameImageNode.hidden = true
         }
         self.rootNode.addChildNode(lastFrameImageNode)
@@ -84,7 +84,7 @@ class PrimitivesScene: SCNScene {
     
     func createSpeedButtons() {
         // Frame
-        let textSpeed = SCNText(string: "Speed: \(Int(_playSendDelay*1000)) ms", extrusionDepth: 0)
+        let textSpeed = SCNText(string: "Speed: \(__animations.animationSpeedInt()) ms", extrusionDepth: 0)
         textSpeed.font = NSFont(name: "Arial", size: 1.2)
         let textSpeedNode = SCNNode(geometry: textSpeed)
         textSpeedNode.name = "mySpeedText"
@@ -109,7 +109,7 @@ class PrimitivesScene: SCNScene {
     }
     
     func createFrameButtons() {
-        let textFrame = SCNText(string: "Frame: \(myFrameCount)/\(myMaxFrameCount)", extrusionDepth: 0)
+        let textFrame = SCNText(string: "Frame: \(__animations.getAnimationFrameID())/\(__animations.getAnimationFrameCount())", extrusionDepth: 0)
         textFrame.font = NSFont(name: "Arial", size: 1.2)
         let textFrameNode = SCNNode(geometry: textFrame)
         textFrameNode.name = "myFrameText"
@@ -131,7 +131,7 @@ class PrimitivesScene: SCNScene {
         delFrameImageNode.name = "myDelFrameButton"
         delFrameImageNode.position = SCNVector3(x:-18.7, y:12, z:0)
         // for first frame, there is nothing to delete
-        if ( myFrameCount == 1 ) {
+        if ( __animations.getAnimationFrameID() == 1 ) {
             delFrameImageNode.hidden = true
         }
         self.rootNode.addChildNode(delFrameImageNode)

@@ -10,11 +10,19 @@ import SceneKit
 
 var lastMousePos: NSPoint = NSPoint()
 var startAngle: CGFloat = CGFloat()
-var klickedColor: Byte = Byte(1)
+var klickedColor: UInt8 = UInt8(1)
 let relativeBarPosition: CGFloat = 500.0
 
 
 class GameView: SCNView {
+    
+    func resetView() {
+        // goto first frame
+        self.firstButtonPressed()
+        
+        // Update speed
+        self.updateSpeedText()
+    }
     
     func updateButtonVisibility() {
         // init
@@ -26,7 +34,7 @@ class GameView: SCNView {
         
         // first Frame, only one Frame
         // -> no button visible
-        if myFrameCount == 1 && myMaxFrameCount == 1 {
+        if __animations.getAnimationFrameID() == 1 && __animations.getAnimationFrameCount() == 1 {
             nextFrame = false;
             lastFrame = false;
             prevFrame = false;
@@ -35,7 +43,7 @@ class GameView: SCNView {
         }
         
         // first Frame, second exists.
-        if myFrameCount == 1 && myMaxFrameCount > 1 {
+        if __animations.getAnimationFrameID() == 1 && __animations.getAnimationFrameCount() > 1 {
             // Visible:
             nextFrame = true;
             lastFrame = true;
@@ -46,7 +54,7 @@ class GameView: SCNView {
         }
         
         // previous Frame exists, no more Frames
-        if myFrameCount > 1 && myFrameCount == myMaxFrameCount {
+        if __animations.getAnimationFrameID() > 1 && __animations.getAnimationFrameID() == __animations.getAnimationFrameCount() {
             // Visible:
             prevFrame = true;
             firstFrame = true;
@@ -57,7 +65,7 @@ class GameView: SCNView {
         }
         
         // previous Frame exists and next Frame exists {
-        if myFrameCount > 1 && myFrameCount < myMaxFrameCount {
+        if __animations.getAnimationFrameID() > 1 && __animations.getAnimationFrameID() < __animations.getAnimationFrameCount() {
             // Visible:
             prevFrame = true;
             firstFrame = true;
@@ -68,7 +76,7 @@ class GameView: SCNView {
         
         if let rootNode = self.scene?.rootNode {
             for childNode in rootNode.childNodes {
-                let buttonNode: SCNNode = childNode as SCNNode
+                let buttonNode: SCNNode = childNode as! SCNNode
                 if buttonNode.name == "myNextFrameButton" {
                     buttonNode.hidden = !nextFrame;
                 }
@@ -85,8 +93,8 @@ class GameView: SCNView {
                     buttonNode.hidden = !delFrame
                 }
                 if buttonNode.name == "myFrameText" {
-                    let geometry:SCNText = buttonNode.geometry as SCNText
-                    geometry.string = "Frame: \(myFrameCount)/\(myMaxFrameCount)"
+                    let geometry:SCNText = buttonNode.geometry as! SCNText
+                    geometry.string = "Frame: \(__animations.getAnimationFrameID())/\(__animations.getAnimationFrameCount())"
                 }
                 
             }
@@ -97,7 +105,8 @@ class GameView: SCNView {
     func updateLEDFrame() {
         // get actuall frame data
         
-        let data : UnsafePointer<Byte> = UnsafePointer<Byte>(myFrames.mutableBytes)
+//        let data : UnsafePointer<Byte> = UnsafePointer<Byte>(myFrames.mutableBytes)
+        let data = __animations.getAnimData()
         //NSMutableData
         if let rootNode = self.scene?.rootNode {
             if let cubeNode = rootNode.childNodeWithName("cubeNode", recursively: true) {
@@ -108,8 +117,8 @@ class GameView: SCNView {
                                 let ledID: Int = Int(name.integerValue)
                                 if let material: SCNMaterial = geometry.firstMaterial {
                                     var color: NSColor = NSColor()
-                                    let colorPosition: Int = ((myFrameCount-1)*64) + ledID
-                                    let savedColor: Byte = data[colorPosition]
+                                    let colorPosition: Int = ((__animations.getAnimationFrameID()-1)*64) + ledID
+                                    let savedColor: UInt8 = data[colorPosition]
                                     if data[colorPosition] == 255 {
                                         color = NSColor.grayColor()
                                     }else{
@@ -130,13 +139,15 @@ class GameView: SCNView {
     
     func plusButtonPressed() {
         // Extend the data array with one frame
-        myFrames.appendBytes(emptyFrame, length: 64)
+        //myFrames.appendBytes(emptyFrame, length: 64)
+        __animations.addFrame()
         
         // Add frame
-        myMaxFrameCount++;
+        //myMaxFrameCount++;
 
         // Goto new frame
-        myFrameCount = myMaxFrameCount;
+        //myFrameCount = __animations.getAnimationFrameCount();
+        __animations.gotoLastFrame()
         
         // Update LEDs
         updateLEDFrame()
@@ -150,21 +161,24 @@ class GameView: SCNView {
         // TODO!
         
         // Remove frame
-        if myMaxFrameCount > 1 {
-            myMaxFrameCount--;
-        }
-        if myFrameCount > 1 {
-            myFrameCount--;
-        }
+        __animations.removeFrame()
+//        if __animations.getAnimationFrameCount() > 1 {
+//            myMaxFrameCount--;
+//        }
+//        if myFrameCount > 1 {
+//            myFrameCount--;
+//        }
         
         // Update control button visibility
         updateButtonVisibility()
     }
 
     func prevButtonPressed() {
-        if myFrameCount > 1 {
-            myFrameCount--
-        }
+//        if myFrameCount > 1 {
+//            myFrameCount--
+//        }
+        __animations.gotoPrevFrame()
+        
         // Update LEDs
         updateLEDFrame()
         
@@ -173,9 +187,10 @@ class GameView: SCNView {
     }
     
     func nextButtonPressed() {
-        if myFrameCount < myMaxFrameCount {
-            myFrameCount++
-        }
+//        if myFrameCount < myMaxFrameCount {
+//            myFrameCount++
+//        }
+        __animations.gotoNextFrame()
         
         // Update LEDs
         updateLEDFrame()
@@ -185,7 +200,8 @@ class GameView: SCNView {
     }
     
     func firstButtonPressed() {
-        myFrameCount = 1;
+        //myFrameCount = 1;
+        __animations.gotoFirstFrame()
         
         // Update LEDs
         updateLEDFrame()
@@ -195,7 +211,7 @@ class GameView: SCNView {
     }
     
     func lastButtonPressed() {
-        myFrameCount = myMaxFrameCount
+        __animations.gotoLastFrame()
         
         // Update LEDs
         updateLEDFrame()
@@ -205,27 +221,29 @@ class GameView: SCNView {
     }
     
     func plusSpeedButtonPressed() {
-        if ( _playSendDelay <= 3 ) { // 3 seconds slowest fps
-            _playSendDelay = _playSendDelay + 0.1
+        __animations.increaseSpeed()
+//        if ( _playSendDelay <= 3 ) { // 3 seconds slowest fps
+//            _playSendDelay = _playSendDelay + 0.1
             updateSpeedText()
-        }
+//        }
     }
     
     func minusSpeedButtonPressed() {
-        println(_playSendDelay)
-        if ( _playSendDelay > 0.2 ) { //  100ms fastest fps
-            _playSendDelay = _playSendDelay - 0.1
+        //println(_playSendDelay)
+        __animations.decreaseSpeed()
+//        if ( _playSendDelay > 0.2 ) { //  100ms fastest fps
+//            _playSendDelay = _playSendDelay - 0.1
             updateSpeedText()
-        }
+//        }
     }
     
     func updateSpeedText() {
         if let rootNode = self.scene?.rootNode {
             for childNode in rootNode.childNodes {
-                let buttonNode: SCNNode = childNode as SCNNode
+                let buttonNode: SCNNode = childNode as! SCNNode
                 if buttonNode.name == "mySpeedText" {
-                    let geometry:SCNText = buttonNode.geometry as SCNText
-                    geometry.string = "Speed: \(Int(_playSendDelay*1000)) ms"
+                    let geometry:SCNText = buttonNode.geometry as! SCNText
+                    geometry.string = "Speed: \(__animations.animationSpeedInt()) ms"
                 }
                 
             }
@@ -272,14 +290,14 @@ class GameView: SCNView {
                     if let geom = node.geometry {
                         if let name:NSString = geom.name {
                             if name.integerValue >= 0 && name.integerValue < 64  { // LED lamps
-                                let color: NSColor = geom.firstMaterial?.diffuse.contents as NSColor
+                                let color: NSColor = geom.firstMaterial?.diffuse.contents as! NSColor
                                 if color != NSColor.grayColor() {
                                     // Make sure we are in range of 0...255
                                     let ledColor = (color.hueComponent * 255) % 255
                                     if ( ledColor >= 0 && ledColor < 255 ) {
-                                        klickedColor = Byte(ledColor)
+                                        klickedColor = UInt8(ledColor)
                                     }
-                                    klickedColor = Byte (color.hueComponent * 255)
+                                    klickedColor = UInt8 (color.hueComponent * 255)
                                     moveArrows(Int(klickedColor))
                                     //println(klickedColor)
                                 }
@@ -314,7 +332,7 @@ class GameView: SCNView {
                     if clickedNode.name == "myBox" {
                         anim = false
                     }
-                    if clickedNode.name == "myPlayButton" && myMaxFrameCount > 1 {
+                    if clickedNode.name == "myPlayButton" && __animations.getAnimationFrameCount() > 1 {
                         playButtonPressed()
                         anim = false
                     }
@@ -357,7 +375,7 @@ class GameView: SCNView {
                             if colorInt > 253 {
                                 klickedColor = 253 // Maximum value
                             }else{
-                                klickedColor = Byte(colorInt)
+                                klickedColor = UInt8(colorInt)
                                 println(klickedColor)
                             }
                         }
@@ -376,11 +394,11 @@ class GameView: SCNView {
                 if let node = result.node {
                     if let geom = node.geometry {
                         if let name:NSString = geom.name {
-                            let myGeometry:SCNText = self.scene!.rootNode.childNodeWithName("myDescr", recursively: true)?.geometry as SCNText
+                            let myGeometry:SCNText = self.scene!.rootNode.childNodeWithName("myDescr", recursively: true)?.geometry as! SCNText
                             // Show touched led
                             myGeometry.string = name
                             // Check for previously color
-                            let prevColor = geom.firstMaterial?.diffuse.contents as NSColor
+                            let prevColor = geom.firstMaterial?.diffuse.contents as! NSColor
                             if prevColor != NSColor.grayColor() {
                                 geom.firstMaterial?.diffuse.contents  = NSColor.grayColor()
                                 ledColorOn = false
@@ -443,13 +461,14 @@ class GameView: SCNView {
                     SCNTransaction.commit()
                     
                     // Update the LED frame
-                    var myByte: [Byte]
+                    var myByte: UInt8
                     if ledColorOn {
-                        myByte = [klickedColor]
+                        myByte = klickedColor
                     }else{
-                        myByte = [255]  // Off
+                        myByte = 255  // Off
                     }
-                    myFrames.replaceBytesInRange(NSMakeRange(((myFrameCount-1)*64)+ledPressed, 1), withBytes: myByte)
+                    __animations.setLEDColor(myByte, led: ledPressed)
+                    //myFrames.replaceBytesInRange(NSMakeRange(((myFrameCount-1)*64)+ledPressed, 1), withBytes: myByte)
                     
                 }
 
@@ -518,7 +537,8 @@ class GameView: SCNView {
             break;
         case 17: // t - Key
             // Reset the frame color on the Cube
-            myFrames.replaceBytesInRange(NSMakeRange(myFrameCount-1, 64), withBytes: emptyFrame)
+            //myFrames.replaceBytesInRange(NSMakeRange(myFrameCount-1, 64), withBytes: emptyFrame)
+            __animations.clearLEDColor()
             
             // Reset the frame color in 3D
             if let rootNode = self.scene?.rootNode {

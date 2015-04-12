@@ -9,6 +9,8 @@
 import Cocoa
 
 var _animationsWindow: NSWindow = NSWindow()
+var _cubeWindow: NSWindow = NSWindow()
+var __animations: Animations = Animations()
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -19,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         _animationsWindow = animationsWindow
+        _cubeWindow = window
+        //__animations.initialize()
     }
     
     func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
