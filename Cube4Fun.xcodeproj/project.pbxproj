@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21D6151ACE66CA00303E00 /* AnimationsController.swift */; };
+		AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4C7F1D1AD2400500E52973 /* view-sidetree.png */; };
 		AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */; };
 		AD914B7E1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD914B7D1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm */; };
 		AD914B811AC7CED5001DDD98 /* libPocoFoundationd.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AD914B7F1AC7CE81001DDD98 /* libPocoFoundationd.12.dylib */; };
 		AD914B821AC7CED5001DDD98 /* libPocoNet.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AD914B801AC7CE81001DDD98 /* libPocoNet.12.dylib */; };
+		AD9811B31AD4D60400173858 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9811B21AD4D60400173858 /* Animations.swift */; };
 		ADADD8C51ACA5FBD00674ED7 /* media-playback-pause-5.png in Resources */ = {isa = PBXBuildFile; fileRef = ADADD8C41ACA5FBD00674ED7 /* media-playback-pause-5.png */; };
 		ADADD8C71ACA5FC200674ED7 /* media-playback-start-5.png in Resources */ = {isa = PBXBuildFile; fileRef = ADADD8C61ACA5FC200674ED7 /* media-playback-start-5.png */; };
 		ADADD8C91ACA618800674ED7 /* media-seek-forward-5.png in Resources */ = {isa = PBXBuildFile; fileRef = ADADD8C81ACA618800674ED7 /* media-seek-forward-5.png */; };
@@ -23,11 +26,15 @@
 		ADCB865B1AC6471C00E300C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB865A1AC6471C00E300C7 /* AppDelegate.swift */; };
 		ADCB865D1AC6471C00E300C7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB865C1AC6471C00E300C7 /* GameView.swift */; };
 		ADCB865F1AC6471C00E300C7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB865E1AC6471C00E300C7 /* GameViewController.swift */; };
-		ADCB86611AC6471C00E300C7 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB86601AC6471C00E300C7 /* art.scnassets */; };
 		ADCB86631AC6471C00E300C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB86621AC6471C00E300C7 /* Images.xcassets */; };
 		ADCB86661AC6471C00E300C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADCB86641AC6471C00E300C7 /* MainMenu.xib */; };
 		ADCB86721AC6471C00E300C7 /* Cube4FunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB86711AC6471C00E300C7 /* Cube4FunTests.swift */; };
 		ADCB867C1AC6498400E300C7 /* PrimitivesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB867B1AC6498400E300C7 /* PrimitivesScene.swift */; };
+		ADD39B901AD119FB0092EF25 /* Cube4Fun-Icon-16.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD39B8B1AD119FB0092EF25 /* Cube4Fun-Icon-16.png */; };
+		ADD39B911AD119FB0092EF25 /* Cube4Fun-Icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD39B8C1AD119FB0092EF25 /* Cube4Fun-Icon-32.png */; };
+		ADD39B921AD119FB0092EF25 /* Cube4Fun-Icon-64.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD39B8D1AD119FB0092EF25 /* Cube4Fun-Icon-64.png */; };
+		ADD39B931AD119FB0092EF25 /* Cube4Fun-Icon-128.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD39B8E1AD119FB0092EF25 /* Cube4Fun-Icon-128.png */; };
+		ADD39B941AD119FB0092EF25 /* Cube4Fun-Icon-256.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD39B8F1AD119FB0092EF25 /* Cube4Fun-Icon-256.png */; };
 		ADE765191AC8FD42003CA000 /* Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE765181AC8FD42003CA000 /* Gradient.png */; };
 		ADE7651D1AC90AB3003CA000 /* Arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE7651C1AC90AB3003CA000 /* Arrows.png */; };
 		ADE7651F1AC92423003CA000 /* Gradient2.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE7651E1AC92423003CA000 /* Gradient2.png */; };
@@ -44,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD21D6151ACE66CA00303E00 /* AnimationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsController.swift; sourceTree = "<group>"; };
+		AD4C7F1D1AD2400500E52973 /* view-sidetree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "view-sidetree.png"; sourceTree = "<group>"; };
 		AD914B781AC7C62D001DDD98 /* Cube4Fun-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cube4Fun-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubeNetwork.cpp; sourceTree = "<group>"; };
 		AD914B7A1AC7C62E001DDD98 /* CubeNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeNetwork.h; sourceTree = "<group>"; };
@@ -51,6 +60,7 @@
 		AD914B7D1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCtoCPlusPlus.mm; sourceTree = "<group>"; };
 		AD914B7F1AC7CE81001DDD98 /* libPocoFoundationd.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libPocoFoundationd.12.dylib; sourceTree = "<group>"; };
 		AD914B801AC7CE81001DDD98 /* libPocoNet.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libPocoNet.12.dylib; sourceTree = "<group>"; };
+		AD9811B21AD4D60400173858 /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		ADADD8C41ACA5FBD00674ED7 /* media-playback-pause-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "media-playback-pause-5.png"; sourceTree = "<group>"; };
 		ADADD8C61ACA5FC200674ED7 /* media-playback-start-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "media-playback-start-5.png"; sourceTree = "<group>"; };
 		ADADD8C81ACA618800674ED7 /* media-seek-forward-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "media-seek-forward-5.png"; sourceTree = "<group>"; };
@@ -65,13 +75,17 @@
 		ADCB865A1AC6471C00E300C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADCB865C1AC6471C00E300C7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		ADCB865E1AC6471C00E300C7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		ADCB86601AC6471C00E300C7 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ADCB86621AC6471C00E300C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADCB86651AC6471C00E300C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ADCB866B1AC6471C00E300C7 /* Cube4FunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cube4FunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB86701AC6471C00E300C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADCB86711AC6471C00E300C7 /* Cube4FunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube4FunTests.swift; sourceTree = "<group>"; };
 		ADCB867B1AC6498400E300C7 /* PrimitivesScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimitivesScene.swift; sourceTree = "<group>"; };
+		ADD39B8B1AD119FB0092EF25 /* Cube4Fun-Icon-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cube4Fun-Icon-16.png"; sourceTree = "<group>"; };
+		ADD39B8C1AD119FB0092EF25 /* Cube4Fun-Icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cube4Fun-Icon-32.png"; sourceTree = "<group>"; };
+		ADD39B8D1AD119FB0092EF25 /* Cube4Fun-Icon-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cube4Fun-Icon-64.png"; sourceTree = "<group>"; };
+		ADD39B8E1AD119FB0092EF25 /* Cube4Fun-Icon-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cube4Fun-Icon-128.png"; sourceTree = "<group>"; };
+		ADD39B8F1AD119FB0092EF25 /* Cube4Fun-Icon-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cube4Fun-Icon-256.png"; sourceTree = "<group>"; };
 		ADE765181AC8FD42003CA000 /* Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gradient.png; sourceTree = "<group>"; };
 		ADE7651C1AC90AB3003CA000 /* Arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrows.png; sourceTree = "<group>"; };
 		ADE7651E1AC92423003CA000 /* Gradient2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gradient2.png; sourceTree = "<group>"; };
@@ -97,7 +111,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		ADADD8C31ACA5FAE00674ED7 /* Playback */ = {
+		ADADD8C31ACA5FAE00674ED7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				ADC4C2421ACD0D8A00ED8952 /* Background.jpg */,
@@ -108,9 +122,10 @@
 				ADADD8C81ACA618800674ED7 /* media-seek-forward-5.png */,
 				ADADD8CA1ACA622400674ED7 /* media-seek-backward-5.png */,
 				ADADD8CC1ACA6D3800674ED7 /* media-skip-backward-5.png */,
+				AD4C7F1D1AD2400500E52973 /* view-sidetree.png */,
 				ADADD8CD1ACA6D3800674ED7 /* media-skip-forward-5.png */,
 			);
-			name = Playback;
+			name = Images;
 			sourceTree = "<group>";
 		};
 		ADCB864C1AC6471C00E300C7 = {
@@ -136,15 +151,17 @@
 		ADCB86571AC6471C00E300C7 /* Cube4Fun */ = {
 			isa = PBXGroup;
 			children = (
-				ADADD8C31ACA5FAE00674ED7 /* Playback */,
+				ADD39B8A1AD1196E0092EF25 /* Icons */,
+				ADADD8C31ACA5FAE00674ED7 /* Images */,
 				ADCB865A1AC6471C00E300C7 /* AppDelegate.swift */,
+				AD9811B21AD4D60400173858 /* Animations.swift */,
+				AD21D6151ACE66CA00303E00 /* AnimationsController.swift */,
 				ADCB865C1AC6471C00E300C7 /* GameView.swift */,
 				ADCB865E1AC6471C00E300C7 /* GameViewController.swift */,
 				ADCB867B1AC6498400E300C7 /* PrimitivesScene.swift */,
 				ADE7651C1AC90AB3003CA000 /* Arrows.png */,
 				ADE765181AC8FD42003CA000 /* Gradient.png */,
 				ADE7651E1AC92423003CA000 /* Gradient2.png */,
-				ADCB86601AC6471C00E300C7 /* art.scnassets */,
 				ADCB86621AC6471C00E300C7 /* Images.xcassets */,
 				ADCB86641AC6471C00E300C7 /* MainMenu.xib */,
 				ADCB86581AC6471C00E300C7 /* Supporting Files */,
@@ -180,6 +197,18 @@
 				ADCB86701AC6471C00E300C7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADD39B8A1AD1196E0092EF25 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				ADD39B8B1AD119FB0092EF25 /* Cube4Fun-Icon-16.png */,
+				ADD39B8C1AD119FB0092EF25 /* Cube4Fun-Icon-32.png */,
+				ADD39B8D1AD119FB0092EF25 /* Cube4Fun-Icon-64.png */,
+				ADD39B8E1AD119FB0092EF25 /* Cube4Fun-Icon-128.png */,
+				ADD39B8F1AD119FB0092EF25 /* Cube4Fun-Icon-256.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,17 +291,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADD39B901AD119FB0092EF25 /* Cube4Fun-Icon-16.png in Resources */,
 				ADADD8C91ACA618800674ED7 /* media-seek-forward-5.png in Resources */,
-				ADCB86611AC6471C00E300C7 /* art.scnassets in Resources */,
+				ADD39B931AD119FB0092EF25 /* Cube4Fun-Icon-128.png in Resources */,
 				ADC4C2431ACD0D8A00ED8952 /* Background.jpg in Resources */,
 				ADE765191AC8FD42003CA000 /* Gradient.png in Resources */,
 				ADE7651F1AC92423003CA000 /* Gradient2.png in Resources */,
+				ADD39B941AD119FB0092EF25 /* Cube4Fun-Icon-256.png in Resources */,
 				ADADD8D21ACA7B3400674ED7 /* list-add-2.png in Resources */,
 				ADCB86631AC6471C00E300C7 /* Images.xcassets in Resources */,
 				ADADD8C51ACA5FBD00674ED7 /* media-playback-pause-5.png in Resources */,
 				ADCB86661AC6471C00E300C7 /* MainMenu.xib in Resources */,
 				ADADD8C71ACA5FC200674ED7 /* media-playback-start-5.png in Resources */,
+				ADD39B921AD119FB0092EF25 /* Cube4Fun-Icon-64.png in Resources */,
+				AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */,
 				ADE7651D1AC90AB3003CA000 /* Arrows.png in Resources */,
+				ADD39B911AD119FB0092EF25 /* Cube4Fun-Icon-32.png in Resources */,
 				ADADD8CB1ACA622400674ED7 /* media-seek-backward-5.png in Resources */,
 				ADADD8CE1ACA6D3800674ED7 /* media-skip-backward-5.png in Resources */,
 				ADADD8D31ACA7B3400674ED7 /* list-remove-2.png in Resources */,
@@ -296,9 +330,11 @@
 			files = (
 				ADCB865D1AC6471C00E300C7 /* GameView.swift in Sources */,
 				ADCB865F1AC6471C00E300C7 /* GameViewController.swift in Sources */,
+				AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */,
 				AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */,
 				ADCB867C1AC6498400E300C7 /* PrimitivesScene.swift in Sources */,
 				AD914B7E1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm in Sources */,
+				AD9811B31AD4D60400173858 /* Animations.swift in Sources */,
 				ADCB865B1AC6471C00E300C7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
