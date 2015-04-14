@@ -60,9 +60,23 @@ class Animations: NSObject {
         return _animationArray.count
     }
     
+    func loadAnimations(animArray: NSArray) {
+        // clear the array first
+        _animationArray.removeAll(keepCapacity: true)
+        for ( var i=0; i<animArray.count; i++ ) {
+            _animationArray.append(animArray[i] as! NSMutableDictionary)
+            //println("append Animation count: \(_animationArray.count)")
+        }
+        _gameView.resetView()
+        __tableView.reloadData()
+    }
+    
     func getAnimation(id: Int) -> (NSDictionary) {
         let myAnimation = _animationArray[id] as NSDictionary
         return myAnimation
+    }
+    func getAnimations() -> ([NSDictionary]) {
+        return _animationArray as [NSDictionary];
     }
     
     func getAnimationName(id: Int) -> (String) {

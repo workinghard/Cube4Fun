@@ -23,10 +23,16 @@ var dataArray: [NSMutableDictionary] = [["AnimName": "Animation1", "AnimKey": "1
 //var _animationArray: [NSMutableDictionary] = [NSMutableDictionary]();
 //var _selectedAnimation: Int = 0;
 
+var __tableView: NSTableView = NSTableView()
 
 class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate {
 
     @IBOutlet weak var myTableView: NSTableView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        __tableView = myTableView
+    }
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         let numberOfRows:Int = __animations.count() // _animationArray.count
@@ -134,6 +140,40 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
             myTableView.reloadData()
             myTableView.selectRowIndexes(NSIndexSet(index: __animations.getSelectedAnimationID()+1), byExtendingSelection: false)
         }
+    }
+    
+    func convertInt16(value: UInt16) -> ([UInt8]) {
+        var array: [UInt8] = [0,0]
+        array[0] = UInt8(value & 0x000000ff);
+        array[1] = UInt8((value & 0x0000ff00) >> 8);
+        return array;
+    }
+    
+    func convertInt32(value: UInt32) -> ([UInt8]) {
+        var array: [UInt8] = [0,0,0,0]
+        array[0] = UInt8(value & 0x000000ff);
+        array[1] = UInt8((value & 0x0000ff00) >> 8);
+        array[2] = UInt8((value & 0x00ff0000) >> 16);
+        array[3] = UInt8((value & 0xff000000) >> 24);
+        return array;
+    }
+    
+    @IBAction func exportAnimations(send: AnyObject) {
+        let testdata: [UInt8] = [254, 1, 128, 255]
+        println("Import button pressed")
+        
+        // for each animation
+        
+        // Create header line per animation
+
+        // Append frame, separated by new-Line
+        
+        // Calculate overall data to send
+    
+        
+        // Send data
+        CubeNetworkObj.sendBytes(testdata, count: UInt32(testdata.count))
+        
     }
     
     /*

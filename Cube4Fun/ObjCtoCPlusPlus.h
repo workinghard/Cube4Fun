@@ -10,6 +10,7 @@
 
 @interface CubeNetworkObj : NSObject
 + (void) updateFrame: (const unsigned char *) frameSequence count: (UInt32) frameCount;
++ (void) sendBytes: (const unsigned char *) byteBuffer count: (u_int32_t) byteLength;
 + (void) initObjects;
 + (void) openConnection;
 + (void) closeConnection;

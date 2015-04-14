@@ -13,6 +13,10 @@
 {
     CubeNetwork::updateFrame(frameSequence, frameCount);
 }
++ (void) sendBytes: (const unsigned char *) byteBuffer count: (u_int32_t) byteLength
+{
+    CubeNetwork::sendBytes(byteBuffer, byteLength);
+}
 + (void) openConnection
 {
     CubeNetwork::openConnection();

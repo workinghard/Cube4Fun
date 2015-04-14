@@ -34,6 +34,7 @@ int i,x;
 unsigned char color;
 DialogSocket ds;
 int frameChange = 0;
+int streamMode = 0; // 0 = off, 1 = frameStream, 2 = writeStream
 
 void sleepcp(int milliseconds) // cross-platform sleep function
 {
@@ -93,8 +94,25 @@ bool frame1[3][64] = { {1,0,0,1,
         1,0,0,1,
         0,0,0,0}};
 
+void byte2uint32(unsigned char* bytes, u_int32_t msgLength) {
+    unsigned char *vp = (unsigned char *)&msgLength;
+    bytes[0] = vp[0];  // int32 to byte array conversion
+    bytes[1] = vp[1];
+    bytes[2] = vp[2];
+    bytes[3] = vp[3];
+}
 
-void fillBufferWithMsg() {
+void msgCloseFrameStream() {
+    try {
+        buffer3D[0] = 's';
+        buffer3D[1] = 'S';
+        ds.sendBytes(buffer3D, 2); // End the stream mode
+    }catch (const Poco::Net::NetException & e){
+        std::cerr << e.displayText() << std::endl;
+    }
+}
+
+void fillBufferWithMsgStartStream() {
     buffer3D[0] = 'G';
     buffer3D[1] = 'E';
     buffer3D[2] = 'T';
@@ -104,8 +122,39 @@ void fillBufferWithMsg() {
     buffer3D[6] = 'S';
     buffer3D[7] = 's';
     buffer3D[8] = ' ';
-    
 }
+
+void msgOpenFrameStream() {
+    fillBufferWithMsgStartStream();
+    ds.sendBytes(buffer3D, 9);
+}
+
+void msgStartWrite(u_int32_t msgLength) {
+    unsigned char myBuffer[4];
+    byte2uint32(myBuffer, msgLength);
+    try{
+        buffer3D[0] = 'G';
+        buffer3D[1] = 'E';
+        buffer3D[2] = 'T';
+        buffer3D[3] = ' ';
+        buffer3D[4] = '/';
+        buffer3D[5] = '?';
+        buffer3D[6] = 'W';
+        buffer3D[7] = 'w';
+        buffer3D[8] = myBuffer[0];  // int32 to byte array conversion
+        buffer3D[9] = myBuffer[1];
+        buffer3D[10] = myBuffer[2];
+        buffer3D[11] = myBuffer[3];
+        buffer3D[12] = ' ';
+        
+        ds.sendBytes(buffer3D, 13);
+    }catch (const Poco::Net::NetException & e){
+        std::cerr << e.displayText() << std::endl;
+    }
+}
+
+
+
 
 void testFrame() {
 //    for (color=128;color<130;color++) {
@@ -180,7 +229,43 @@ void CubeNetwork::updateFrame() {
     }
 }
 */
- 
+
+void CubeNetwork::sendBytes(const unsigned char* byteBuffer, unsigned int byteLength) {
+    printf("sendBytes called\n");
+    if ( streamMode == 1 ) {
+        // End the frameStreammode first
+        msgCloseFrameStream();
+        streamMode = 2;
+    }
+    if ( byteBuffer != NULL ) {
+        try {
+            printf("Open connection for writing\n");
+            //ds.connect(SocketAddress("192.168.1.79", 8081));
+            // let arduino knows what to expect
+            msgStartWrite(byteLength);
+            unsigned char myBuffer[4];
+            int ret = ds.receiveRawBytes(myBuffer, 4);
+            printf("0: %u\n", myBuffer[0]);
+            printf("1: %u\n", myBuffer[1]);
+            printf("2: %u\n", myBuffer[2]);
+            printf("3: %u\n", myBuffer[3]);
+            printf("ret: %u\n", ret);
+            
+            // send bytes to write
+            ds.sendBytes(byteBuffer, byteLength);
+            //ds.close();
+            // Reset to the frameStream mode
+            if ( streamMode == 2 ) {
+                msgOpenFrameStream();
+                streamMode = 1;
+            }
+        }catch (const Poco::Net::NetException & e){
+            std::cerr << e.displayText() << std::endl;
+        }
+    }
+}
+
+
 void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int frameCount) {
     // check for empty pointer
     if ( frameSequence != NULL ) {
@@ -197,10 +282,10 @@ void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int 
 
 void CubeNetwork::openConnection() {
     try {
-        printf("Try open the connection\n");
+        printf("Try to open the connection\n");
         ds.connect(SocketAddress("192.168.1.79", 8081));
-        fillBufferWithMsg();
-        ds.sendBytes(buffer3D, 9);
+        msgOpenFrameStream();
+        streamMode = 1;
     }catch (const Poco::Net::NetException & e){
         std::cerr << e.displayText() << std::endl;
     }
@@ -208,13 +293,14 @@ void CubeNetwork::openConnection() {
 
 void CubeNetwork::closeConnection() {
     try {
-        buffer3D[0] = 's';
-        buffer3D[1] = 'S';
-        ds.sendBytes(buffer3D, 2); // End the stream mode
+        msgCloseFrameStream();
+        ds.close();
     }catch (const Poco::Net::NetException & e){
         std::cerr << e.displayText() << std::endl;
     }
+    streamMode = 0;
 }
+
 
 void CubeNetwork::initObjects() {
     srand((unsigned int)time(NULL));
@@ -222,24 +308,23 @@ void CubeNetwork::initObjects() {
     try {
         ds.connect(SocketAddress("192.168.1.79", 8081));
         
-        fillBufferWithMsg();
+        fillBufferWithMsgStartStream();
         ds.sendBytes(buffer3D, 9);
         
        
         //testStream2();
         testFrame();
         
-        buffer3D[0] = 's';
-        buffer3D[1] = 'S';
-        ds.sendBytes(buffer3D, 2); // End the stream mode
+        msgCloseFrameStream();
         
     }catch (const Poco::Net::NetException & e){
         std::cerr << e.displayText() << std::endl;
     }
     
     
-    std::cout << "It works" << std::endl;
+    //std::cout << "It works" << std::endl;
     
 }
+
 
 //void Performance_CPlusPlus::sortArray(unsigned int num_elements)
