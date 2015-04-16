@@ -16,12 +16,29 @@ let relativeBarPosition: CGFloat = 500.0
 
 class GameView: SCNView {
     
+    var playTimer: NSTimer = NSTimer()
+    
+    func scheduleTimer() {
+        playTimer = NSTimer.scheduledTimerWithTimeInterval(__animations.animationSpeedFloat(), target: __animations, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
+    }
+    func resetTimer() {
+        playTimer.invalidate()
+    }
+    func rescheduleTimer() {
+        resetTimer();
+        scheduleTimer();
+    }
+    
     func resetView() {
+        println("Reset view")
         // goto first frame
         self.firstButtonPressed()
         
         // Update speed
         self.updateSpeedText()
+        
+        // Send updated frame
+        __animations.sendFrame()
     }
     
     func updateButtonVisibility() {
@@ -99,6 +116,9 @@ class GameView: SCNView {
                 
             }
         }
+        
+        // Send updated frame
+        __animations.sendFrame()
 
     }
     
@@ -106,7 +126,7 @@ class GameView: SCNView {
         // get actuall frame data
         
 //        let data : UnsafePointer<Byte> = UnsafePointer<Byte>(myFrames.mutableBytes)
-        let data = __animations.getAnimData()
+        //let data = __animations.getAnimDataSelected()
         //NSMutableData
         if let rootNode = self.scene?.rootNode {
             if let cubeNode = rootNode.childNodeWithName("cubeNode", recursively: true) {
@@ -118,8 +138,8 @@ class GameView: SCNView {
                                 if let material: SCNMaterial = geometry.firstMaterial {
                                     var color: NSColor = NSColor()
                                     let colorPosition: Int = ((__animations.getAnimationFrameID()-1)*64) + ledID
-                                    let savedColor: UInt8 = data[colorPosition]
-                                    if data[colorPosition] == 255 {
+                                    let savedColor: UInt8 = __animations.getLEDColor(colorPosition) //data[colorPosition]
+                                    if savedColor == 255 {
                                         color = NSColor.grayColor()
                                     }else{
                                         let hueColor = CGFloat(savedColor) / 255.0
@@ -135,6 +155,7 @@ class GameView: SCNView {
                 }
             }
         }
+        //__animations.sendFrame()
     }
     
     func plusButtonPressed() {
@@ -226,6 +247,7 @@ class GameView: SCNView {
 //            _playSendDelay = _playSendDelay + 0.1
             updateSpeedText()
 //        }
+        rescheduleTimer()
     }
     
     func minusSpeedButtonPressed() {
@@ -235,6 +257,7 @@ class GameView: SCNView {
 //            _playSendDelay = _playSendDelay - 0.1
             updateSpeedText()
 //        }
+        rescheduleTimer()
     }
     
     func updateSpeedText() {
@@ -261,6 +284,7 @@ class GameView: SCNView {
 
         // Start the animation
         _playAllFrames = true
+        scheduleTimer();
     }
     
     func pauseButtonPressed() {
@@ -272,6 +296,7 @@ class GameView: SCNView {
     
         // Stop the animation
         _playAllFrames = false
+        resetTimer()
     }
     
     func openAnimationWindow() {
@@ -409,6 +434,15 @@ class GameView: SCNView {
                             }
                             ledPressed = Int(name.intValue)
                             
+                            // Update the LED frame
+                            var myByte: UInt8
+                            if ledColorOn {
+                                myByte = klickedColor
+                            }else{
+                                myByte = 255  // Off
+                            }
+                            __animations.setLEDColor(myByte, led: ledPressed)
+                            
                         }
                     }
                 }
@@ -460,14 +494,6 @@ class GameView: SCNView {
                 
                     SCNTransaction.commit()
                     
-                    // Update the LED frame
-                    var myByte: UInt8
-                    if ledColorOn {
-                        myByte = klickedColor
-                    }else{
-                        myByte = 255  // Off
-                    }
-                    __animations.setLEDColor(myByte, led: ledPressed)
                     //myFrames.replaceBytesInRange(NSMakeRange(((myFrameCount-1)*64)+ledPressed, 1), withBytes: myByte)
                     
                 }

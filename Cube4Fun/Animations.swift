@@ -41,7 +41,7 @@ class Animations: NSObject {
     var _animationSelected: Int = 0
     let _minSendDelay: NSTimeInterval = 0.200 // fastes speed 200 milliseconds
     let maxFrameSpeed = 3000 // the lowest possible speed allowed
-    let minFrameSpeed = 200 // the fastest possible speed allowed
+    let minFrameSpeed = 100 // the fastest possible speed allowed
     let frameSpeedStep = 100 // how fast increase or decrease speed
 //    var _playSendDelay: NSTimeInterval = 0.5 // 500 milliseconds as default
     
@@ -58,6 +58,33 @@ class Animations: NSObject {
     // How much animations do we have
     func count() -> (Int) {
         return _animationArray.count
+    }
+    
+    func sendFrame() {
+        let time = NSDate.timeIntervalSinceReferenceDate()
+        
+        if (_previousUpdateTime == 0.0) {
+            _previousUpdateTime = time;
+        }
+        // need to do this because of rounding issues
+        let deltaTime: Int = Int( round( (time - _previousUpdateTime) * 10 ) * 100);
+        
+        //var ms = Int((time % 1) * 1000)
+        if ( _playAllFrames ) {
+            println("Delta: \(deltaTime) Speed: \(__animations.animationSpeedInt())")
+            if ( deltaTime >= __animations.animationSpeedInt() ){
+                _previousUpdateTime = time;
+                if (self.getAnimationFrameID() >= self.getAnimationFrameCount()) {
+                    _gameView.firstButtonPressed()
+                }else{
+                    _gameView.nextButtonPressed()
+                }
+                CubeNetworkObj.updateFrame(self.getAnimDataSelected(), count: UInt32(self.getAnimationFrameID()))
+                
+            }
+        }else{
+            CubeNetworkObj.updateFrame(self.getAnimDataSelected(), count: UInt32(self.getAnimationFrameID()))
+        }
     }
     
     func loadAnimations(animArray: NSArray) {
@@ -116,7 +143,7 @@ class Animations: NSObject {
     }
     func getAnimationFrameCount(id: Int) -> (Int) {
         let myFrames: NSMutableData = (self.getAnimation(id)).objectForKey(AnimFrames) as! NSMutableData
-        return myFrames.length / 64
+        return (myFrames.length / 64)
         //let value = (self.getAnimation(id)).objectForKey("AnimFrames") as Int
         //return value
     }
@@ -223,16 +250,37 @@ class Animations: NSObject {
         return _minSendDelay
     }
     
-    func getAnimData() -> (UnsafePointer<UInt8>) {
+    func getAnimDataSelected() -> (UnsafePointer<UInt8>) {
         let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
         let byteArray = UnsafePointer<UInt8>(myData.bytes)
         return byteArray
     }
     
+    func getAnimData(id: Int) -> (UnsafePointer<UInt8>) {
+        let myData: NSMutableData = (self.getAnimation(id)).objectForKey(AnimFrames) as! NSMutableData
+        let byteArray = UnsafePointer<UInt8>(myData.bytes)
+        return byteArray
+    }
+    
+    func getAnimDataLength(id: Int) -> Int {
+        let myFrames: NSMutableData = (self.getAnimation(id)).objectForKey(AnimFrames) as! NSMutableData
+        return myFrames.length
+    }
+    
     func setLEDColor(color: UInt8, led: Int) {
+        println("Led pressed: \(led)")
         var myByte: [UInt8] = [color]
         let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
-        myData.replaceBytesInRange(NSMakeRange(((self.getAnimationFrameID()-1)*64)+led, 1), withBytes: myByte)
+        let bytePosition = NSMakeRange(((self.getAnimationFrameID()-1)*64)+led, 1)
+        myData.replaceBytesInRange(bytePosition, withBytes: myByte)
+        
+        // Send updated frame
+        self.sendFrame()
+    }
+    
+    func getLEDColor(pos: Int) -> (UInt8) {
+        let myData = self.getAnimDataSelected()
+        return myData[pos]
     }
     
     func clearLEDColor() {

@@ -62,10 +62,12 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
     }
     */
     
-    func sendFrame() {
-        sendFrame(NSDate.timeIntervalSinceReferenceDate())
-    }
+
+    //func sendFrame() {
+    //    sendFrame(NSDate.timeIntervalSinceReferenceDate())
+    //}
     
+    /*
     func sendFrame(time: NSTimeInterval) {
         //println(time)
         
@@ -82,18 +84,20 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
                 }else{
                     self.gameView!.nextButtonPressed()
                 }
-                CubeNetworkObj.updateFrame(__animations.getAnimData(), count: UInt32(__animations.getAnimationFrameID()))
+                CubeNetworkObj.updateFrame(__animations.getAnimDataSelected(), count: UInt32(__animations.getAnimationFrameID()))
                 _previousUpdateTime = time;
             }
         }else{
             if ( _deltaTime >= __animations.getMinSendDelay() ) {
-                CubeNetworkObj.updateFrame(__animations.getAnimData(), count: UInt32(__animations.getAnimationFrameID()))
+                CubeNetworkObj.updateFrame(__animations.getAnimDataSelected(), count: UInt32(__animations.getAnimationFrameID()))
                 //println("SendFrame: \(_deltaTime)")
                 _previousUpdateTime = time;
             }
         }    
         //CubeNetworkObj.updateFrame(UnsafePointer<UInt8>(myFrames.bytes), count: myFrameCount)
     }
+
+*/
     
     override func awakeFromNib(){
 
@@ -107,9 +111,10 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
 //        myFrameCount = 1
         // Open connection to the LED cube
         CubeNetworkObj.openConnection()
+        __animations.sendFrame()
 
         // Fallback timer if nothing render at the moment
-        NSTimer.scheduledTimerWithTimeInterval(__animations.getMinSendDelay(), target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
+    //    NSTimer.scheduledTimerWithTimeInterval(__animations.getMinSendDelay(), target: self, selector: Selector("sendFrame"), userInfo: nil, repeats: true)
         
 
      

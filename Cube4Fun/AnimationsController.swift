@@ -159,20 +159,62 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     }
     
     @IBAction func exportAnimations(send: AnyObject) {
-        let testdata: [UInt8] = [254, 1, 128, 255]
+        var sendData: [UInt8] = [UInt8]()
         println("Import button pressed")
         
         // for each animation
-        
-        // Create header line per animation
+        for ( var i = 0; i < __animations.count(); i++ ) {
+            // Create header line per animation
+            // Syntax: ,F<key:12Byte>,<playtime:2Byte><speed:2Byte><frames:2Byte>\n
+            
+            // Key
+            sendData.append(UInt8(ascii: ","))
+            sendData.append(UInt8(ascii: "F"))
+            let key = __animations.getAnimationKey(i)
+            let keyArray: NSData = key.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
+            let keyBytes: UnsafePointer<UInt8> = UnsafePointer<UInt8>(keyArray.bytes)
+            for (var j = 0; j < keyArray.length; j++) {
+                sendData.append(UInt8(keyBytes[j]))
+            }
+            sendData.append(UInt8(ascii: ","))
+            
+            // Playtime
+            let playTime: [UInt8] = convertInt16(UInt16(__animations.getAnimationDuration(i)))
+            sendData.append(playTime[0])
+            sendData.append(playTime[1])
 
-        // Append frame, separated by new-Line
+            // Speed
+            let playSpeed: [UInt8] = convertInt16(UInt16(__animations.getAnimationSpeed(i)))
+            sendData.append(playSpeed[0])
+            sendData.append(playSpeed[1])
+            
+            // Frames
+            let playFrames: [UInt8] = convertInt16(UInt16(__animations.getAnimationFrameCount(i)))
+            sendData.append(playFrames[0])
+            sendData.append(playFrames[1])
+            
+            // End line
+            sendData.append(UInt8(ascii: "\n"))
+
+            // Append frame, separated by new-Line
+            let animData = __animations.getAnimData(i)
+            for ( var count = 1; count <= __animations.getAnimDataLength(i); count++) {
+                sendData.append(animData[count-1])
+                // End line for each frame
+                if ( (count % 64) == 0 ) {
+                    sendData.append(UInt8(ascii: "\n"))
+                }
+            }
+            
+            
+        }
+        
         
         // Calculate overall data to send
     
         
         // Send data
-        CubeNetworkObj.sendBytes(testdata, count: UInt32(testdata.count))
+        CubeNetworkObj.sendBytes(sendData , count: UInt32(sendData.count))
         
     }
     
