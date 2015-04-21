@@ -110,7 +110,12 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
 //        myFrames = NSMutableData(bytes: emptyFrame, length: 64)
 //        myFrameCount = 1
         // Open connection to the LED cube
-        CubeNetworkObj.openConnection()
+        let established = CubeNetworkObj.openConnection(__prefData.ipAddr(), port: UInt32(__prefData.portNR()))
+        if established {
+            println("connection established")
+        }else{
+            println("connection failed")
+        }
         __animations.sendFrame()
 
         // Fallback timer if nothing render at the moment

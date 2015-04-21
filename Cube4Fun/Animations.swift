@@ -71,7 +71,7 @@ class Animations: NSObject {
         
         //var ms = Int((time % 1) * 1000)
         if ( _playAllFrames ) {
-            println("Delta: \(deltaTime) Speed: \(__animations.animationSpeedInt())")
+            //println("Delta: \(deltaTime) Speed: \(__animations.animationSpeedInt())")
             if ( deltaTime >= __animations.animationSpeedInt() ){
                 _previousUpdateTime = time;
                 if (self.getAnimationFrameID() >= self.getAnimationFrameCount()) {
@@ -99,6 +99,7 @@ class Animations: NSObject {
     }
     
     func getAnimation(id: Int) -> (NSDictionary) {
+        println(_animationArray.count)
         let myAnimation = _animationArray[id] as NSDictionary
         return myAnimation
     }
@@ -188,7 +189,7 @@ class Animations: NSObject {
     }
     func newAnimation() -> (NSMutableDictionary)  {
         println("create new animation")
-        return [AnimName: "Animation1", AnimKey: "1=anim1", AnimDuration: 1, AnimSpeed: 500, AnimFrames: self.newFrame()]
+        return [AnimName: "Animation1", AnimKey: "1=anim1", AnimDuration: 10, AnimSpeed: 500, AnimFrames: self.newFrame()]
     }
     func newFrame() -> (NSMutableData) {
         println("create new frame")

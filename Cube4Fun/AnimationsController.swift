@@ -163,7 +163,7 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
         println("Import button pressed")
         
         // for each animation
-        for ( var i = 0; i < __animations.count(); i++ ) {
+        for ( var i = 0; i < __animations.count(); ++i ) {
             // Create header line per animation
             // Syntax: ,F<key:12Byte>,<playtime:2Byte><speed:2Byte><frames:2Byte>\n
             
@@ -173,8 +173,11 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
             let key = __animations.getAnimationKey(i)
             let keyArray: NSData = key.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
             let keyBytes: UnsafePointer<UInt8> = UnsafePointer<UInt8>(keyArray.bytes)
-            for (var j = 0; j < keyArray.length; j++) {
-                sendData.append(UInt8(keyBytes[j]))
+            for (var j = 0; j < keyArray.length; ++j) {
+                
+                if  keyBytes[j] != UInt8(ascii: "\n") && keyBytes[j] != UInt8(ascii: "\r" )  { // ignore line breaks in the key
+                    sendData.append(UInt8(keyBytes[j]))
+                }
             }
             sendData.append(UInt8(ascii: ","))
             
@@ -198,7 +201,7 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
 
             // Append frame, separated by new-Line
             let animData = __animations.getAnimData(i)
-            for ( var count = 1; count <= __animations.getAnimDataLength(i); count++) {
+            for ( var count = 1; count <= __animations.getAnimDataLength(i); ++count) {
                 sendData.append(animData[count-1])
                 // End line for each frame
                 if ( (count % 64) == 0 ) {
