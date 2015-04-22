@@ -94,12 +94,13 @@ class Animations: NSObject {
             _animationArray.append(animArray[i] as! NSMutableDictionary)
             //println("append Animation count: \(_animationArray.count)")
         }
+        self.setSelectedAnimationID(0)
         _gameView.resetView()
         __tableView.reloadData()
     }
     
     func getAnimation(id: Int) -> (NSDictionary) {
-        println(_animationArray.count)
+        //println(_animationArray.count)
         let myAnimation = _animationArray[id] as NSDictionary
         return myAnimation
     }
@@ -269,7 +270,7 @@ class Animations: NSObject {
     }
     
     func setLEDColor(color: UInt8, led: Int) {
-        println("Led pressed: \(led)")
+        //println("Led pressed: \(led)")
         var myByte: [UInt8] = [color]
         let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
         let bytePosition = NSMakeRange(((self.getAnimationFrameID()-1)*64)+led, 1)

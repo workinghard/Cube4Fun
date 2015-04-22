@@ -142,4 +142,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
             }
         }
     }
+    
+    @IBAction func cmdCopyPressed(send: AnyObject) {
+        println("cmd c pressed")
+    }
+    
+    @IBAction func cmdPastePressed(send: AnyObject) {
+        println("cmd v pressed")
+    }
+    
 }

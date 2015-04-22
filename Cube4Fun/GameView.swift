@@ -545,8 +545,19 @@ class GameView: SCNView {
         super.mouseDragged(theEvent)
     }
     
+    override func flagsChanged(theEvent: NSEvent) {
+//        println(theEvent.keyCode)
+    }
+    
     override func keyDown(theEvent: NSEvent) {
-
+        
+        /*
+        if theEvent.modifierFlags & .CommandKeyMask != nil {
+            println("cmd pressed")
+        }
+*/
+        
+        
         switch (theEvent.keyCode) {
         case 123:
             self.rotateCamera(0.0, y: -0.1)

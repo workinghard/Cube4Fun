@@ -40,7 +40,7 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide SceneKit Mac Template" keyEquivalent="h" id="134">
+                            <menuItem title="Hide Cube4Fun" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
@@ -59,7 +59,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit SceneKit Mac Template" keyEquivalent="q" id="136">
+                            <menuItem title="Quit Cube4Fun" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>
@@ -151,12 +151,12 @@
                             </menuItem>
                             <menuItem title="Copy" keyEquivalent="c" id="197">
                                 <connections>
-                                    <action selector="copy:" target="-1" id="224"/>
+                                    <action selector="cmdCopyPressed:" target="494" id="ncB-O2-9om"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Paste" keyEquivalent="v" id="203">
                                 <connections>
-                                    <action selector="paste:" target="-1" id="226"/>
+                                    <action selector="cmdPastePressed:" target="494" id="DVw-0V-wp5"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Clear All" id="202">
@@ -509,7 +509,7 @@
             <point key="canvasLocation" x="-98" y="-41"/>
         </window>
         <window title="Animations" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="P9J-nG-QID">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="575" height="451"/>
@@ -559,7 +559,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         </tableColumn>
                                         <tableColumn identifier="AnimDur" width="106" minWidth="10" maxWidth="3.4028234663852886e+38" id="cuc-7v-Huv">
-                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Duration (min)">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Duration (sec)">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -631,23 +631,12 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="nV0-RH-sJ4">
-                        <rect key="frame" x="480" y="13" width="81" height="32"/>
+                        <rect key="frame" x="459" y="13" width="102" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PEl-nt-7zX">
+                        <buttonCell key="cell" type="push" title="Download" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PEl-nt-7zX">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
-                    </button>
-                    <button verticalHuggingPriority="750" id="T8G-1e-2FV">
-                        <rect key="frame" x="399" y="13" width="81" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kli-kZ-6PU">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="exportAnimations:" target="zTF-MA-6NT" id="Wqf-T8-ibb"/>
-                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="5ce-Cy-Wpt">
                         <rect key="frame" x="220" y="13" width="58" height="32"/>
@@ -680,6 +669,17 @@
                         </buttonCell>
                         <connections>
                             <action selector="delNewAnimation:" target="zTF-MA-6NT" id="TLj-Ja-Alc"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" id="T8G-1e-2FV">
+                        <rect key="frame" x="374" y="13" width="85" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="push" title="Upload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kli-kZ-6PU">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="exportAnimations:" target="zTF-MA-6NT" id="Wqf-T8-ibb"/>
                         </connections>
                     </button>
                 </subviews>
