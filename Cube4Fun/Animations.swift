@@ -2,9 +2,22 @@
 //  Animations.swift
 //  Cube4Fun
 //
-//  Created by Nik on 07.04.15.
-//  Copyright (c) 2015 DerNik. All rights reserved.
+//  Created by Nikolai Rinas on 07.04.15.
+//  Copyright (c) 2015 Nikolai Rinas. All rights reserved.
 //
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>
+
 
 // Constants
 let AnimName = "AnimName"
@@ -44,6 +57,8 @@ class Animations: NSObject {
     let minFrameSpeed = 100 // the fastest possible speed allowed
     let frameSpeedStep = 100 // how fast increase or decrease speed
 //    var _playSendDelay: NSTimeInterval = 0.5 // 500 milliseconds as default
+    var _copyFrameBuffer: [UInt8] = [UInt8]()
+    
     
     override init() {
         super.init()
@@ -53,6 +68,10 @@ class Animations: NSObject {
         self.addAnimation()
         // Set visible animation
         _animationSelected = 0
+        // Init Buffer
+        for ( var i = 0; i < 64 ; ++i ) {
+        _copyFrameBuffer.append(255)
+        }
     }
     
     // How much animations do we have
@@ -286,9 +305,21 @@ class Animations: NSObject {
     }
     
     func clearLEDColor() {
-        var myByte: [UInt8] = [255]
+        //var myByte: [UInt8] = [255]
         let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
         myData.replaceBytesInRange(NSMakeRange((self.getAnimationFrameID()-1)*64, 64), withBytes: _emptyFrame)        
     }
     
+    func copyDisplayedFrame() {
+        let myData = self.getAnimDataSelected()
+        var animFrameCount = (self.getAnimationFrameID()-1)*64
+        for ( var i = 0 ; i < 64 ; ++i ) {
+            _copyFrameBuffer[i] = myData[animFrameCount]
+            ++animFrameCount
+        }
+    }
+    func pasteDisplayedFrame() {
+        let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
+        myData.replaceBytesInRange(NSMakeRange((self.getAnimationFrameID()-1)*64, 64), withBytes: _copyFrameBuffer)
+    }
 }

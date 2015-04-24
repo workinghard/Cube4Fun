@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
-        <plugIn identifier="com.apple.SceneKitIBPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.SceneKitIBPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -159,9 +159,9 @@
                                     <action selector="cmdPastePressed:" target="494" id="DVw-0V-wp5"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Clear All" id="202">
+                            <menuItem title="Clear Frame" keyEquivalent="r" id="202">
                                 <connections>
-                                    <action selector="delete:" target="-1" id="235"/>
+                                    <action selector="clearLEDs:" target="494" id="3lJ-Lc-QCa"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Select All" keyEquivalent="a" id="198">

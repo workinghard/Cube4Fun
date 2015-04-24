@@ -2,9 +2,21 @@
 //  AppDelegate.swift
 //  Cube4Fun
 //
-//  Created by Nik on 27.03.15.
-//  Copyright (c) 2015 DerNik. All rights reserved.
+//  Created by Nikolai Rinas on 27.03.15.
+//  Copyright (c) 2015 Nikolai Rinas. All rights reserved.
 //
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 import Cocoa
 
@@ -144,11 +156,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
     }
     
     @IBAction func cmdCopyPressed(send: AnyObject) {
-        println("cmd c pressed")
+        __animations.copyDisplayedFrame()
     }
     
     @IBAction func cmdPastePressed(send: AnyObject) {
-        println("cmd v pressed")
+        __animations.pasteDisplayedFrame()
+        _gameView.updateLEDFrame()
+        // Send updated frame
+        __animations.sendFrame()
+    }
+    
+    @IBAction func clearLEDs(send: AnyObject) {
+        // Remove from Memory
+        __animations.clearLEDColor()
+        // Update visual
+        _gameView.updateLEDFrame()
+        // Update on a hardware
+        __animations.sendFrame()
     }
     
 }
