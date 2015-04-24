@@ -11,8 +11,6 @@
 		AD46E3F61AE4AA800040A7FE /* libPocoFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */; };
 		AD46E3F71AE4AA800040A7FE /* libPocoNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD46E3F51AE4AA800040A7FE /* libPocoNet.a */; };
 		AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4C7F1D1AD2400500E52973 /* view-sidetree.png */; };
-		AD6B66951AE9F894007FAA17 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AD6B66941AE9F894007FAA17 /* LICENSE */; };
-		AD6B66971AE9FD5C007FAA17 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AD6B66961AE9FD5C007FAA17 /* README.md */; };
 		AD8CD54B1AE34109007DBF9A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD54A1AE34109007DBF9A /* Preferences.swift */; };
 		AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */; };
 		AD914B7E1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD914B7D1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm */; };
@@ -315,7 +313,6 @@
 				ADCB86661AC6471C00E300C7 /* MainMenu.xib in Resources */,
 				ADADD8C71ACA5FC200674ED7 /* media-playback-start-5.png in Resources */,
 				AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */,
-				AD6B66951AE9F894007FAA17 /* LICENSE in Resources */,
 				ADE7651D1AC90AB3003CA000 /* Arrows.png in Resources */,
 				ADADD8CB1ACA622400674ED7 /* media-seek-backward-5.png in Resources */,
 				ADADD8CE1ACA6D3800674ED7 /* media-skip-backward-5.png in Resources */,
@@ -340,7 +337,6 @@
 			files = (
 				ADCB865D1AC6471C00E300C7 /* GameView.swift in Sources */,
 				ADCB865F1AC6471C00E300C7 /* GameViewController.swift in Sources */,
-				AD6B66971AE9FD5C007FAA17 /* README.md in Sources */,
 				AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */,
 				AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */,
 				ADCB867C1AC6498400E300C7 /* PrimitivesScene.swift in Sources */,
