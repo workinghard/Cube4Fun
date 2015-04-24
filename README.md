@@ -21,4 +21,4 @@ Rainbowduino:
 
 
 
-[logo]: http://cube4fun.net/public/Cube6-256j.png "Logo"
+[logo]: http://cube4fun.net/public/Cube6-128j.png "Logo"
