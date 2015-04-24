@@ -164,7 +164,7 @@
                                     <action selector="clearLEDs:" target="494" id="3lJ-Lc-QCa"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Select All" keyEquivalent="a" id="198">
+                            <menuItem title="Select All" hidden="YES" enabled="NO" keyEquivalent="a" id="198">
                                 <connections>
                                     <action selector="selectAll:" target="-1" id="232"/>
                                 </connections>
