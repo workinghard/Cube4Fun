@@ -11,6 +11,8 @@
 		AD46E3F61AE4AA800040A7FE /* libPocoFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */; };
 		AD46E3F71AE4AA800040A7FE /* libPocoNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD46E3F51AE4AA800040A7FE /* libPocoNet.a */; };
 		AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4C7F1D1AD2400500E52973 /* view-sidetree.png */; };
+		AD6B66951AE9F894007FAA17 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AD6B66941AE9F894007FAA17 /* LICENSE */; };
+		AD6B66971AE9FD5C007FAA17 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AD6B66961AE9FD5C007FAA17 /* README.md */; };
 		AD8CD54B1AE34109007DBF9A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD54A1AE34109007DBF9A /* Preferences.swift */; };
 		AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */; };
 		AD914B7E1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD914B7D1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm */; };
@@ -51,6 +53,10 @@
 		AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPocoFoundation.a; path = Cube4Fun/Poco/libPocoFoundation.a; sourceTree = "<group>"; };
 		AD46E3F51AE4AA800040A7FE /* libPocoNet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPocoNet.a; path = Cube4Fun/Poco/libPocoNet.a; sourceTree = "<group>"; };
 		AD4C7F1D1AD2400500E52973 /* view-sidetree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "view-sidetree.png"; path = "Pics/view-sidetree.png"; sourceTree = "<group>"; };
+		AD6B66941AE9F894007FAA17 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		AD6B66961AE9FD5C007FAA17 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		AD6B669D1AEA0219007FAA17 /* RainbowCube_Designmix.ino */ = {isa = PBXFileReference; lastKnownFileType = text; name = RainbowCube_Designmix.ino; path = Arduino/RainbowCube_Designmix.ino; sourceTree = "<group>"; };
+		AD6B669E1AEA0219007FAA17 /* Webserver4Rainbow_v3.ino */ = {isa = PBXFileReference; lastKnownFileType = text; name = Webserver4Rainbow_v3.ino; path = Arduino/Webserver4Rainbow_v3.ino; sourceTree = "<group>"; };
 		AD8CD54A1AE34109007DBF9A /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = src/Preferences.swift; sourceTree = "<group>"; };
 		AD914B781AC7C62D001DDD98 /* Cube4Fun-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Cube4Fun-Bridging-Header.h"; path = "src/Cube4Fun-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CubeNetwork.cpp; path = src/CubeNetwork.cpp; sourceTree = "<group>"; };
@@ -103,6 +109,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD6B66931AE9F87E007FAA17 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AD6B66961AE9FD5C007FAA17 /* README.md */,
+				AD6B66941AE9F894007FAA17 /* LICENSE */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		AD6B66981AE9FE22007FAA17 /* Arduino */ = {
+			isa = PBXGroup;
+			children = (
+				AD6B669D1AEA0219007FAA17 /* RainbowCube_Designmix.ino */,
+				AD6B669E1AEA0219007FAA17 /* Webserver4Rainbow_v3.ino */,
+			);
+			name = Arduino;
+			sourceTree = "<group>";
+		};
 		AD8CD53B1AE3399D007DBF9A /* libPoco */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +157,7 @@
 		ADCB864C1AC6471C00E300C7 = {
 			isa = PBXGroup;
 			children = (
+				AD6B66981AE9FE22007FAA17 /* Arduino */,
 				AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */,
 				AD46E3F51AE4AA800040A7FE /* libPocoNet.a */,
 				AD8CD53B1AE3399D007DBF9A /* libPoco */,
@@ -154,6 +179,7 @@
 		ADCB86571AC6471C00E300C7 /* Cube4Fun */ = {
 			isa = PBXGroup;
 			children = (
+				AD6B66931AE9F87E007FAA17 /* Common */,
 				ADADD8C31ACA5FAE00674ED7 /* Images */,
 				ADCB865A1AC6471C00E300C7 /* AppDelegate.swift */,
 				AD9811B21AD4D60400173858 /* Animations.swift */,
@@ -289,6 +315,7 @@
 				ADCB86661AC6471C00E300C7 /* MainMenu.xib in Resources */,
 				ADADD8C71ACA5FC200674ED7 /* media-playback-start-5.png in Resources */,
 				AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */,
+				AD6B66951AE9F894007FAA17 /* LICENSE in Resources */,
 				ADE7651D1AC90AB3003CA000 /* Arrows.png in Resources */,
 				ADADD8CB1ACA622400674ED7 /* media-seek-backward-5.png in Resources */,
 				ADADD8CE1ACA6D3800674ED7 /* media-skip-backward-5.png in Resources */,
@@ -313,6 +340,7 @@
 			files = (
 				ADCB865D1AC6471C00E300C7 /* GameView.swift in Sources */,
 				ADCB865F1AC6471C00E300C7 /* GameViewController.swift in Sources */,
+				AD6B66971AE9FD5C007FAA17 /* README.md in Sources */,
 				AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */,
 				AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */,
 				ADCB867C1AC6498400E300C7 /* PrimitivesScene.swift in Sources */,
