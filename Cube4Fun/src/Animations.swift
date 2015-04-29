@@ -226,9 +226,13 @@ class Animations: NSObject {
             myData.length = myLength - 64 // remove one frame
         }
     }
+    /*
     func insertDisplFrame() {
         // Get Array
-        let myData = self.getAnimDataSelected()
+//        var myData  = self.getAnimDataSelected()
+        var myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
+
+        //var myData: [UInt8] = [UInt8]()
         // Get startPositions of the selected frame
         var frameStartPos = (self.getAnimationFrameID()-1)*64
         // Insert empty frame at this position
@@ -245,6 +249,8 @@ class Animations: NSObject {
             myData.removeAtIndex(frameStartPos)  
         } 
     }
+*/
+
     
     func animationSpeedInt() -> Int {
         let frameSpeed: Int = (self.getAnimation(_animationSelected)).objectForKey(AnimSpeed) as! Int
