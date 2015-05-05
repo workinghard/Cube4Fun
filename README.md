@@ -10,6 +10,8 @@ Overview
 * Use the animation-tag from any internet service/device by sending GET/  request to activate animations
 * Share your animations with everybody on this site: http://www.cube4fun.net
 
+![alt text][overview1]
+
 Requirements
 --------------------------------------
 * MacOS 10.10 or higher
@@ -35,3 +37,4 @@ Rainbowduino:
 
 
 [logo]: http://cube4fun.net/public/Cube6-128j.png "Logo"
+[overview1]: http://cube4fun.net/public/Overview-Pic1.png "Overview"
