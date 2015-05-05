@@ -29,20 +29,19 @@
 * SD card
 * Rainbowduino + RGB Cube [check this Wiki for more details](http://www.seeedstudio.com/wiki/Rainbow_Cube)
 
-Arduino with network shield and sd-card
---------------------------------------
-
-...
-
 ----
 
-Rainbowduino:
---------------------------------------
+## Arduino with network shield and sd-card
+This piece is a main controller. The main objectives are:
+ * Handle the communcation like receiving animation requests and process 
+ * Save and read animations from SD card
+ * Send data to the Rainbowduino
+TODO: More details to come
 
-...
-
-----
-
+## Rainbowduino:
+This piece receives data over I2C protocol and displays it on the cube.
+It has also some animations. In case there is no data to display it plays default animations.
+There is not much logic on this side. For more details please check the [Rainbowduino Wiki](http://www.seeedstudio.com/wiki/Rainbow_Cube)
 
 
 [logo]: http://cube4fun.net/public/Cube6-128j.png "Logo"
