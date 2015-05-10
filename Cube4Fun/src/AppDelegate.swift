@@ -175,4 +175,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
         __animations.sendFrame()
     }
     
+    @IBAction func cmdInsertPressed(send: AnyObject) {
+        // Insert one new frame at the current position
+        __animations.insertDisplFrame()
+        // Update visual
+        _gameView.updateLEDFrame()
+        _gameView.updateButtonVisibility()
+        
+        // Update on a hardware
+        __animations.sendFrame()
+    }
 }

@@ -149,6 +149,11 @@
                                     <action selector="cut:" target="-1" id="228"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Insert" keyEquivalent="i" id="QIf-r2-Qbo" userLabel="Insert">
+                                <connections>
+                                    <action selector="cmdInsertPressed:" target="494" id="i2Y-8n-lla"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Copy" keyEquivalent="c" id="197">
                                 <connections>
                                     <action selector="cmdCopyPressed:" target="494" id="ncB-O2-9om"/>

@@ -87,6 +87,7 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     
     func tableViewSelectionDidChange(notification: NSNotification) {
         let view: NSTableView = notification.object as! NSTableView
+        println("klicked \(view.selectedRow)")
         __animations.setSelectedAnimationID(view.selectedRow)
        
         _gameView.resetView()
@@ -96,7 +97,7 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
         
         //_selectedAnimation = view.selectedRow
         
-        //println("klicked \(view.selectedRow)")
+        println("klicked \(view.selectedRow)")
     }
     
     func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
@@ -135,6 +136,7 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     
     @IBAction func delNewAnimation(sender: AnyObject) {
         __animations.deleteSelected()
+        myTableView.selectRowIndexes(NSIndexSet(index: __animations.getSelectedAnimationID()-1), byExtendingSelection: false)
         myTableView.reloadData()
     }
     

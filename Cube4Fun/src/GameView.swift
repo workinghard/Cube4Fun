@@ -193,6 +193,8 @@ class GameView: SCNView {
         // remove one frame from the data array
         // TODO!
         
+        self.prevButtonPressed()
+        
         // Remove frame
         __animations.removeFrame()
 //        if __animations.getAnimationFrameCount() > 1 {

@@ -188,6 +188,7 @@ class Animations: NSObject {
         _animationArray.removeAtIndex(_animationSelected)
         if ( _animationSelected == 0 && _animationArray.count == 0 ) { // last Frame
             self.addAnimation()
+            self.setSelectedAnimationID(self.getSelectedAnimationID()-1)
         }
     }
     func moveUpSelected() {
@@ -205,7 +206,7 @@ class Animations: NSObject {
     
     func addAnimation() {
         _animationArray.append(self.newAnimation())
-        println("append Animation count: \(_animationArray.count)")
+        println("append Animation. count: \(_animationArray.count)")
     }
     func newAnimation() -> (NSMutableDictionary)  {
         println("create new animation")
@@ -226,20 +227,40 @@ class Animations: NSObject {
             myData.length = myLength - 64 // remove one frame
         }
     }
-    /*
+    
     func insertDisplFrame() {
+        // Insert empty frame at the current position
+        
         // Get Array
-//        var myData  = self.getAnimDataSelected()
         var myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
+        var myDataBytes = self.getAnimDataSelected()
 
+        
         //var myData: [UInt8] = [UInt8]()
         // Get startPositions of the selected frame
         var frameStartPos = (self.getAnimationFrameID()-1)*64
-        // Insert empty frame at this position
-        for index in 0...64 {
-            myData.insert(_emptyFrame[index], atIndex: frameStartPos)  
-        } 
+
+        // Append one empty frame at the end
+        self.addFrame()
+        
+        var lastArrPos: Int = myData.length - 1
+        println("Framestart: \(frameStartPos)")
+        println("Framelength: \(lastArrPos)")
+
+        // copy frames
+        while ( lastArrPos >= frameStartPos + 64) {
+            //            myDataBytes[lastArrPos] = myDataBytes[lastArrPos-64]
+            let myByte: [UInt8] = [myDataBytes[lastArrPos-64]]
+            let bytePosition = NSMakeRange(lastArrPos, 1)
+            myData.replaceBytesInRange(bytePosition, withBytes: myByte)
+            --lastArrPos
+        }
+        
+        // clear current frame
+        self.clearLEDColor()
     }
+    
+    /*
     func deleteDisplFrame() {
         // Get Array
         let myData = self.getAnimDataSelected()
@@ -249,7 +270,8 @@ class Animations: NSObject {
             myData.removeAtIndex(frameStartPos)  
         } 
     }
-*/
+    */
+
 
     
     func animationSpeedInt() -> Int {
