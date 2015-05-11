@@ -185,4 +185,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
         // Update on a hardware
         __animations.sendFrame()
     }
+    
+    @IBAction func cmdDeletePressed(send: AnyObject) {
+        // Check if we have more than one frame
+        if __animations.getAnimationFrameCount() > 1 {
+            __animations.deleteDisplFrame()
+            
+            // Update visual
+            _gameView.updateLEDFrame()
+            _gameView.updateButtonVisibility()
+            
+            // Update on a hardware
+            __animations.sendFrame()
+        }
+    }
 }

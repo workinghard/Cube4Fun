@@ -149,11 +149,6 @@
                                     <action selector="cut:" target="-1" id="228"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Insert" keyEquivalent="i" id="QIf-r2-Qbo" userLabel="Insert">
-                                <connections>
-                                    <action selector="cmdInsertPressed:" target="494" id="i2Y-8n-lla"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Copy" keyEquivalent="c" id="197">
                                 <connections>
                                     <action selector="cmdCopyPressed:" target="494" id="ncB-O2-9om"/>
@@ -167,6 +162,16 @@
                             <menuItem title="Clear Frame" keyEquivalent="r" id="202">
                                 <connections>
                                     <action selector="clearLEDs:" target="494" id="3lJ-Lc-QCa"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Insert Frame" keyEquivalent="i" id="QIf-r2-Qbo">
+                                <connections>
+                                    <action selector="cmdInsertPressed:" target="494" id="i2Y-8n-lla"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete Frame" keyEquivalent="d" id="JW4-A1-fDy">
+                                <connections>
+                                    <action selector="cmdDeletePressed:" target="494" id="CDU-vU-PaH"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Select All" hidden="YES" enabled="NO" keyEquivalent="a" id="198">
