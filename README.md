@@ -32,7 +32,7 @@
 ----
 
 ## Arduino with network shield and sd-card
-This piece is a main controller. The main objectives are:
+This component is a main controller. The main objectives are:
  * Handle the communcation like receiving animation requests and process 
  * Save and read animations from SD card
  * Send data to the Rainbowduino
@@ -40,9 +40,9 @@ This piece is a main controller. The main objectives are:
 TODO: More details to come
 
 ## Rainbowduino:
-This piece receives data over I2C protocol and displays it on the cube.
+This component receives data over I2C protocol and displays it on the cube.
 It has also some animations. In case there is no data to display it plays default animations.
-There is not much logic on this side. For more details please check the [Rainbowduino Wiki](http://www.seeedstudio.com/wiki/Rainbow_Cube)
+There is no much logic on this side. For more details please check the [Rainbowduino Wiki](http://www.seeedstudio.com/wiki/Rainbow_Cube)
 
 ## Cube4Fun Application
 The application is written in a new apple programming language [Swift](https://developer.apple.com/swift/). The communication part is using the [Poco Library](http://pocoproject.org/) which is written in C++. So it's easy to create a new application for any other device and don't care about TCP/IP communication.
