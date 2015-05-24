@@ -20,8 +20,8 @@
 ### Software
 * MacOS 10.10 or higher
 * Cube4Fun Application (TODO: Link)
-* Arduino Image (TODO: Link)
-* Rainbowduino Image (TODO: Link)
+* [Arduino Image](https://github.com/workinghard/Cube4Fun/blob/master/Arduino/Webserver4Rainbow_v3.ino)
+* [Rainbowduino Image](https://github.com/workinghard/Cube4Fun/blob/master/Arduino/RainbowCube_Designmix.ino)
  
 ### Hardware
 * Arduino Uno or Arduino Mega
