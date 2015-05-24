@@ -46,9 +46,10 @@ There is no much logic on this side. For more details please check the [Rainbowd
 
 ### Implemented functions:
 The communication is only one way and without call backs to achive maximum frames per second. Every sent character or number is exactly one byte. So basically it's a byte stream with following format:
-| Command               | Format        | Description | Examples | 
+
+| Command               | Format        | Description | Examples |
 | --------------------- | ------------- | ----------- | -------- |
-| Blink red/green/blue  | b(r|g|b)      | Blink for couple of seconds with specified color | br |
+| Blink red/green/blue  | b(r\|g\|b)      | Blink for couple of seconds with specified color | br |
 | Clear frame           | d             | Turn all LEDs off | d |
 | Stream mode           | s<64 bytes>n<64 bytes>S | Displays an unlimited number of frames in stream mode. Draws a frame as soon as 64 bytes (one frame) are received | s010001...n0100011...n000011100..S |
 
