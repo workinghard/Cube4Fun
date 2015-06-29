@@ -302,10 +302,12 @@ void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int 
 bool CubeNetwork::openConnection(const char* ipAddr, unsigned int port) {
     connectionEstablished = false;
     printf("Try to open the connection\n");
-    std::string ipAddr_str(reinterpret_cast<const char*>(ipAddr));
-    Poco::UInt16 portNr = port;
+    //std::string ipAddr_str(reinterpret_cast<const char*>(ipAddr));
+    //Poco::UInt16 portNr = port;
     try {
-        ds.connect(SocketAddress(ipAddr_str, portNr), Poco::Timespan(10, 0));
+        connector = new TCPConnector();
+        stream = connector->connect(ipAddr, port, 10); //Connect with 10 seconds timout 
+        //ds.connect(SocketAddress(ipAddr_str, portNr), Poco::Timespan(10, 0));
 
         msgOpenFrameStream();
         streamMode = 1;
