@@ -23,6 +23,8 @@
 		ADADD8CF1ACA6D3800674ED7 /* media-skip-forward-5.png in Resources */ = {isa = PBXBuildFile; fileRef = ADADD8CD1ACA6D3800674ED7 /* media-skip-forward-5.png */; };
 		ADADD8D21ACA7B3400674ED7 /* list-add-2.png in Resources */ = {isa = PBXBuildFile; fileRef = ADADD8D01ACA7B3400674ED7 /* list-add-2.png */; };
 		ADADD8D31ACA7B3400674ED7 /* list-remove-2.png in Resources */ = {isa = PBXBuildFile; fileRef = ADADD8D11ACA7B3400674ED7 /* list-remove-2.png */; };
+		ADADFC1E1B41CDB30099F12B /* tcpconnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADADFC1A1B41CDB30099F12B /* tcpconnector.cpp */; };
+		ADADFC1F1B41CDB30099F12B /* tcpstream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADADFC1C1B41CDB30099F12B /* tcpstream.cpp */; };
 		ADC4C2431ACD0D8A00ED8952 /* Background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADC4C2421ACD0D8A00ED8952 /* Background.jpg */; };
 		ADCB865B1AC6471C00E300C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB865A1AC6471C00E300C7 /* AppDelegate.swift */; };
 		ADCB865D1AC6471C00E300C7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB865C1AC6471C00E300C7 /* GameView.swift */; };
@@ -59,6 +61,10 @@
 		ADADD8CD1ACA6D3800674ED7 /* media-skip-forward-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "media-skip-forward-5.png"; path = "Pics/media-skip-forward-5.png"; sourceTree = "<group>"; };
 		ADADD8D01ACA7B3400674ED7 /* list-add-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-add-2.png"; path = "Pics/list-add-2.png"; sourceTree = "<group>"; };
 		ADADD8D11ACA7B3400674ED7 /* list-remove-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-remove-2.png"; path = "Pics/list-remove-2.png"; sourceTree = "<group>"; };
+		ADADFC1A1B41CDB30099F12B /* tcpconnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcpconnector.cpp; sourceTree = "<group>"; };
+		ADADFC1B1B41CDB30099F12B /* tcpconnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcpconnector.h; sourceTree = "<group>"; };
+		ADADFC1C1B41CDB30099F12B /* tcpstream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcpstream.cpp; sourceTree = "<group>"; };
+		ADADFC1D1B41CDB30099F12B /* tcpstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcpstream.h; sourceTree = "<group>"; };
 		ADC4C2421ACD0D8A00ED8952 /* Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Background.jpg; path = Pics/Background.jpg; sourceTree = "<group>"; };
 		ADCB86551AC6471C00E300C7 /* Cube4Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cube4Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB86591AC6471C00E300C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +177,10 @@
 				AD914B781AC7C62D001DDD98 /* Cube4Fun-Bridging-Header.h */,
 				AD914B7C1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.h */,
 				AD914B7D1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm */,
+				ADADFC1A1B41CDB30099F12B /* tcpconnector.cpp */,
+				ADADFC1B1B41CDB30099F12B /* tcpconnector.h */,
+				ADADFC1C1B41CDB30099F12B /* tcpstream.cpp */,
+				ADADFC1D1B41CDB30099F12B /* tcpstream.h */,
 				ADCB86621AC6471C00E300C7 /* Images.xcassets */,
 				ADCB86641AC6471C00E300C7 /* MainMenu.xib */,
 				ADCB86581AC6471C00E300C7 /* Supporting Files */,
@@ -288,7 +298,9 @@
 				ADCB865D1AC6471C00E300C7 /* GameView.swift in Sources */,
 				ADCB865F1AC6471C00E300C7 /* GameViewController.swift in Sources */,
 				AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */,
+				ADADFC1E1B41CDB30099F12B /* tcpconnector.cpp in Sources */,
 				AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */,
+				ADADFC1F1B41CDB30099F12B /* tcpstream.cpp in Sources */,
 				ADCB867C1AC6498400E300C7 /* PrimitivesScene.swift in Sources */,
 				AD914B7E1AC7C8AD001DDD98 /* ObjCtoCPlusPlus.mm in Sources */,
 				AD9811B31AD4D60400173858 /* Animations.swift in Sources */,
