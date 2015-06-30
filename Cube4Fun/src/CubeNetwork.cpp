@@ -228,7 +228,7 @@ void CubeNetwork::sendBytes(const unsigned char* byteBuffer, unsigned int byteLe
             // let arduino knows what to expect
             msgStartWrite(byteLength);
             char myBuffer[4];
-            int ret = stream->receive(myBuffer,4);
+            long ret = stream->receive(myBuffer,4);
             printf("received Length:\n");
             printf("0: %u\n", myBuffer[0]);
             printf("1: %u\n", myBuffer[1]);
