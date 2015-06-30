@@ -30,6 +30,8 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <chrono>
+#include "tcpconnector.h"
+#include <string>
 
 class CubeNetwork
 {
@@ -41,6 +43,8 @@ public:
     static bool openConnection(const char* ipAddr, unsigned int port);
     //static void openConnection();
     static void closeConnection();
+private:
+    static TCPConnector* connector;
 };
 
 #endif /* defined(__Cube4Fun__CubeNetwork__) */
