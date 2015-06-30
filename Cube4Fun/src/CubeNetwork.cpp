@@ -31,6 +31,8 @@
 //using Poco::Net::SocketAddress;
 //using Poco::Exception;
 
+TCPConnector* connector;
+
 unsigned char buffer3D[64];
 unsigned char receiveBuffer[32];
 int bytesReceived;
@@ -114,7 +116,7 @@ void msgCloseFrameStream() {
     if (stream) {
         buffer3D[0] = 's';
         buffer3D[1] = 'S';
-        stream->send(buffer3D, 2); // End the stream mode
+        stream->send(reinterpret_cast<const char*>(buffer3D), 2); // End the stream mode
     }
 }
 
@@ -129,7 +131,7 @@ void msgOpenFrameStream() {
         buffer3D[6] = 'S';
         buffer3D[7] = 's';
         buffer3D[8] = ' ';
-        stream->send(buffer3D, 9);
+        stream->send(reinterpret_cast<const char*>(buffer3D), 9);
     }
 }
 
@@ -157,7 +159,7 @@ void msgStartWrite(u_int32_t msgLength) {
         printf("2: %u\n", myBuffer[2]);
         printf("3: %u\n", myBuffer[3]);
         
-        stream->send(buffer3D, 13);
+        stream->send(reinterpret_cast<const char*>(buffer3D), 13);
     }
 }
 
@@ -190,7 +192,7 @@ void testFrame() {
         buffer3D[60]=254;
         buffer3D[63]=254;
     }
-    stream->send(buffer3D, 64);
+    stream->send(reinterpret_cast<const char*>(buffer3D), 64);
 }
 
 
@@ -206,7 +208,7 @@ void testStream2() {
                     buffer3D[i] = 255;  // Aus
                 }
             }
-            stream->send(buffer3D, 64);
+            stream->send(reinterpret_cast<const char*>(buffer3D), 64);
             sleepcp(1000); // 20 FPS
             if ( frameChange < 2 ) {
                 frameChange++;  
@@ -228,7 +230,7 @@ void CubeNetwork::sendBytes(const unsigned char* byteBuffer, unsigned int byteLe
         if ( byteBuffer != NULL ) {
             // let arduino knows what to expect
             msgStartWrite(byteLength);
-            unsigned char myBuffer[4];
+            char myBuffer[4];
             int ret = stream->receive(myBuffer,4);
             printf("received Length:\n");
             printf("0: %u\n", myBuffer[0]);
@@ -238,7 +240,7 @@ void CubeNetwork::sendBytes(const unsigned char* byteBuffer, unsigned int byteLe
             printf("ret: %u\n", ret);
             
             // send bytes to write
-            stream->send(byteBuffer, byteLength);
+            stream->send(reinterpret_cast<const char*>(byteBuffer), byteLength);
             // Reset to the frameStream mode
             if ( streamMode == 2 ) {
                 msgOpenFrameStream();
@@ -258,7 +260,7 @@ void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int 
                 buffer3D[i] = frameSequence[i+((frameCount-1)*64)];
             }
             // Send the frame
-            stream->send(buffer3D, 64);
+            stream->send(reinterpret_cast<const char*>(buffer3D), 64);
         }
     }
     

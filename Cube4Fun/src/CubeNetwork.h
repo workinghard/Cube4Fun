@@ -22,11 +22,11 @@
 #define __Cube4Fun__CubeNetwork__
 
 #include <iostream>
-#include "Poco/Foundation.h"
-#include "Poco/Net/SocketAddress.h"
-#include "Poco/Net/DialogSocket.h"
-#include "Poco/Net/NetException.h"
-#include "Poco/Exception.h"
+//#include "Poco/Foundation.h"
+//#include "Poco/Net/SocketAddress.h"
+//#include "Poco/Net/DialogSocket.h"
+//#include "Poco/Net/NetException.h"
+//#include "Poco/Exception.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <chrono>
@@ -43,8 +43,6 @@ public:
     static bool openConnection(const char* ipAddr, unsigned int port);
     //static void openConnection();
     static void closeConnection();
-private:
-    static TCPConnector* connector;
 };
 
 #endif /* defined(__Cube4Fun__CubeNetwork__) */
