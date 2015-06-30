@@ -37,8 +37,6 @@
 
 /* Begin PBXFileReference section */
 		AD21D6151ACE66CA00303E00 /* AnimationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimationsController.swift; path = src/AnimationsController.swift; sourceTree = "<group>"; };
-		AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPocoFoundation.a; path = Cube4Fun/Poco/libPocoFoundation.a; sourceTree = "<group>"; };
-		AD46E3F51AE4AA800040A7FE /* libPocoNet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPocoNet.a; path = Cube4Fun/Poco/libPocoNet.a; sourceTree = "<group>"; };
 		AD4C7F1D1AD2400500E52973 /* view-sidetree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "view-sidetree.png"; path = "Pics/view-sidetree.png"; sourceTree = "<group>"; };
 		AD6B66941AE9F894007FAA17 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		AD6B66961AE9FD5C007FAA17 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -139,8 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				AD6B66981AE9FE22007FAA17 /* Arduino */,
-				AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */,
-				AD46E3F51AE4AA800040A7FE /* libPocoNet.a */,
 				AD8CD53B1AE3399D007DBF9A /* libPoco */,
 				ADCB86571AC6471C00E300C7 /* Cube4Fun */,
 				ADCB866E1AC6471C00E300C7 /* Cube4FunTests */,
