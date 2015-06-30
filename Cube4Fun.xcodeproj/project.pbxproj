@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21D6151ACE66CA00303E00 /* AnimationsController.swift */; };
-		AD46E3F61AE4AA800040A7FE /* libPocoFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD46E3F41AE4AA800040A7FE /* libPocoFoundation.a */; };
-		AD46E3F71AE4AA800040A7FE /* libPocoNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD46E3F51AE4AA800040A7FE /* libPocoNet.a */; };
 		AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4C7F1D1AD2400500E52973 /* view-sidetree.png */; };
 		AD8CD54B1AE34109007DBF9A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD54A1AE34109007DBF9A /* Preferences.swift */; };
 		AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */; };
@@ -86,8 +84,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD46E3F61AE4AA800040A7FE /* libPocoFoundation.a in Frameworks */,
-				AD46E3F71AE4AA800040A7FE /* libPocoNet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
