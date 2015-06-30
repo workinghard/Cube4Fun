@@ -57,10 +57,10 @@
 		ADADD8CD1ACA6D3800674ED7 /* media-skip-forward-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "media-skip-forward-5.png"; path = "Pics/media-skip-forward-5.png"; sourceTree = "<group>"; };
 		ADADD8D01ACA7B3400674ED7 /* list-add-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-add-2.png"; path = "Pics/list-add-2.png"; sourceTree = "<group>"; };
 		ADADD8D11ACA7B3400674ED7 /* list-remove-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-remove-2.png"; path = "Pics/list-remove-2.png"; sourceTree = "<group>"; };
-		ADADFC1A1B41CDB30099F12B /* tcpconnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcpconnector.cpp; sourceTree = "<group>"; };
-		ADADFC1B1B41CDB30099F12B /* tcpconnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcpconnector.h; sourceTree = "<group>"; };
-		ADADFC1C1B41CDB30099F12B /* tcpstream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcpstream.cpp; sourceTree = "<group>"; };
-		ADADFC1D1B41CDB30099F12B /* tcpstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcpstream.h; sourceTree = "<group>"; };
+		ADADFC1A1B41CDB30099F12B /* tcpconnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tcpconnector.cpp; path = src/tcpconnector.cpp; sourceTree = "<group>"; };
+		ADADFC1B1B41CDB30099F12B /* tcpconnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tcpconnector.h; path = src/tcpconnector.h; sourceTree = "<group>"; };
+		ADADFC1C1B41CDB30099F12B /* tcpstream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tcpstream.cpp; path = src/tcpstream.cpp; sourceTree = "<group>"; };
+		ADADFC1D1B41CDB30099F12B /* tcpstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tcpstream.h; path = src/tcpstream.h; sourceTree = "<group>"; };
 		ADC4C2421ACD0D8A00ED8952 /* Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Background.jpg; path = Pics/Background.jpg; sourceTree = "<group>"; };
 		ADCB86551AC6471C00E300C7 /* Cube4Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cube4Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB86591AC6471C00E300C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
