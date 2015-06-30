@@ -38,7 +38,6 @@ unsigned char receiveBuffer[32];
 int bytesReceived;
 int i,x;
 unsigned char color;
-//DialogSocket ds;
 int frameChange = 0;
 int streamMode = 0; // 0 = off, 1 = frameStream, 2 = writeStream
 TCPStream* stream;
@@ -101,8 +100,6 @@ bool frame1[3][64] = { {1,0,0,1,
         0,0,0,0,
         1,0,0,1,
         0,0,0,0}};
-
-bool connectionEstablished = false;
 
 void byte2uint32(unsigned char* bytes, u_int32_t msgLength) {
     unsigned char *vp = (unsigned char *)&msgLength;
@@ -237,7 +234,7 @@ void CubeNetwork::sendBytes(const unsigned char* byteBuffer, unsigned int byteLe
             printf("1: %u\n", myBuffer[1]);
             printf("2: %u\n", myBuffer[2]);
             printf("3: %u\n", myBuffer[3]);
-            printf("ret: %u\n", ret);
+            printf("ret: %lu\n", ret);
             
             // send bytes to write
             stream->send(reinterpret_cast<const char*>(byteBuffer), byteLength);
@@ -267,7 +264,7 @@ void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int 
 }
 
 bool CubeNetwork::openConnection(const char* ipAddr, unsigned int port) {
-    connectionEstablished = false;
+    bool connectionEstablished = false;
     printf("Try to open the connection\n");
     //std::string ipAddr_str(reinterpret_cast<const char*>(ipAddr));
     //Poco::UInt16 portNr = port;
@@ -283,7 +280,6 @@ bool CubeNetwork::openConnection(const char* ipAddr, unsigned int port) {
 }
 
 void CubeNetwork::closeConnection() {
-    connectionEstablished = false;
     msgCloseFrameStream();
     delete stream;
     streamMode = 0;
@@ -291,9 +287,8 @@ void CubeNetwork::closeConnection() {
 
 bool CubeNetwork::connected() {
     if (stream) {
-        connectionEstablished = true;
+        return true;
     }else{
-        connectionEstablished = false;
+        return false;
     }
-    return connectionEstablished;
 }
