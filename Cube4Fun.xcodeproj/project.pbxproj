@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AD21D6161ACE66CA00303E00 /* AnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21D6151ACE66CA00303E00 /* AnimationsController.swift */; };
+		AD296D461BC1DAB900E4617F /* Cube4Fun.app in Resources */ = {isa = PBXBuildFile; fileRef = AD296D451BC1DAB900E4617F /* Cube4Fun.app */; settings = {ASSET_TAGS = (); }; };
 		AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4C7F1D1AD2400500E52973 /* view-sidetree.png */; };
 		AD8CD54B1AE34109007DBF9A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD54A1AE34109007DBF9A /* Preferences.swift */; };
 		AD914B7B1AC7C62E001DDD98 /* CubeNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD914B791AC7C62E001DDD98 /* CubeNetwork.cpp */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		AD21D6151ACE66CA00303E00 /* AnimationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimationsController.swift; path = src/AnimationsController.swift; sourceTree = "<group>"; };
+		AD296D451BC1DAB900E4617F /* Cube4Fun.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Cube4Fun.app; path = bin/Cube4Fun.app; sourceTree = "<group>"; };
 		AD4C7F1D1AD2400500E52973 /* view-sidetree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "view-sidetree.png"; path = "Pics/view-sidetree.png"; sourceTree = "<group>"; };
 		AD6B66941AE9F894007FAA17 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		AD6B66961AE9FD5C007FAA17 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -136,6 +138,7 @@
 		ADCB864C1AC6471C00E300C7 = {
 			isa = PBXGroup;
 			children = (
+				AD296D451BC1DAB900E4617F /* Cube4Fun.app */,
 				AD6B66981AE9FE22007FAA17 /* Arduino */,
 				AD8CD53B1AE3399D007DBF9A /* libPoco */,
 				ADCB86571AC6471C00E300C7 /* Cube4Fun */,
@@ -271,6 +274,7 @@
 				ADADD8D21ACA7B3400674ED7 /* list-add-2.png in Resources */,
 				ADCB86631AC6471C00E300C7 /* Images.xcassets in Resources */,
 				ADADD8C51ACA5FBD00674ED7 /* media-playback-pause-5.png in Resources */,
+				AD296D461BC1DAB900E4617F /* Cube4Fun.app in Resources */,
 				ADCB86661AC6471C00E300C7 /* MainMenu.xib in Resources */,
 				ADADD8C71ACA5FC200674ED7 /* media-playback-start-5.png in Resources */,
 				AD4C7F1E1AD2400500E52973 /* view-sidetree.png in Resources */,
