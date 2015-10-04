@@ -42,7 +42,7 @@ class GameView: SCNView {
     }
     
     func resetView() {
-        println("Reset view")
+        Swift.print("Reset view")
         // goto first frame
         self.firstButtonPressed()
         
@@ -105,7 +105,7 @@ class GameView: SCNView {
         
         if let rootNode = self.scene?.rootNode {
             for childNode in rootNode.childNodes {
-                let buttonNode: SCNNode = childNode as! SCNNode
+                let buttonNode: SCNNode = childNode 
                 if buttonNode.name == "myNextFrameButton" {
                     buttonNode.hidden = !nextFrame;
                 }
@@ -277,7 +277,7 @@ class GameView: SCNView {
     func updateSpeedText() {
         if let rootNode = self.scene?.rootNode {
             for childNode in rootNode.childNodes {
-                let buttonNode: SCNNode = childNode as! SCNNode
+                let buttonNode: SCNNode = childNode 
                 if buttonNode.name == "mySpeedText" {
                     let geometry:SCNText = buttonNode.geometry as! SCNText
                     geometry.string = "Speed: \(__animations.animationSpeedInt()) ms"
@@ -320,7 +320,8 @@ class GameView: SCNView {
     
     override func rightMouseDown(theEvent: NSEvent) {
         let p = self.convertPoint(theEvent.locationInWindow, fromView: nil)
-        if let hitResults = self.hitTest(p, options: nil) {
+        let hitResults = self.hitTest(p, options: nil)
+//        if let hitResults = self.hitTest(p, options: nil) {
             // check that we clicked on at least one object
             if hitResults.count > 0 {
                 // retrieved the first clicked object
@@ -345,7 +346,7 @@ class GameView: SCNView {
                     }
                 }
             }
-        }
+  //      }
     }
     
     override func mouseDown(theEvent: NSEvent) {
@@ -357,7 +358,8 @@ class GameView: SCNView {
         
         // check what nodes are clicked
         let p = self.convertPoint(theEvent.locationInWindow, fromView: nil)
-        if let hitResults = self.hitTest(p, options: nil) {
+        let hitResults = self.hitTest(p, options: nil)
+//        if let hitResults = self.hitTest(p, options: nil) {
             // check that we clicked on at least one object
             if hitResults.count > 0 {
                 // retrieved the first clicked object
@@ -415,7 +417,7 @@ class GameView: SCNView {
                                 klickedColor = 253 // Maximum value
                             }else{
                                 klickedColor = UInt8(colorInt)
-                                println(klickedColor)
+                                Swift.print(klickedColor)
                             }
                         }
                         // Move arrows to the clicked position
@@ -513,7 +515,7 @@ class GameView: SCNView {
                 }
 
             }
-        }
+//        }
         
         super.mouseDown(theEvent)
     }
@@ -528,7 +530,7 @@ class GameView: SCNView {
         SCNTransaction.commit()
     }
     
-    func rotateCamera(var x: CGFloat, var y: CGFloat) {
+    func rotateCamera(x: CGFloat, y: CGFloat) {
         // Save the angle for reset
         startAngle = startAngle + y
         
@@ -614,7 +616,7 @@ class GameView: SCNView {
             super.keyDown(theEvent)
         }
         
-        println(theEvent.keyCode);
+        Swift.print(theEvent.keyCode);
         
         
         //super.keyDown(theEvent)

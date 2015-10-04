@@ -169,7 +169,7 @@ class PrimitivesScene: SCNScene {
   override init() {
     super.init()
     
-    var radius:CGFloat = 1.0
+    let radius:CGFloat = 1.0
     
     let yCount = 4
     let zCount = 4
@@ -239,11 +239,11 @@ class PrimitivesScene: SCNScene {
 
 
     var y:CGFloat = edgePosY
-    for row in 0..<yCount {
+    for _ in 0..<yCount { // row
         var z:CGFloat = edgePosZ
-        for depth in 0..<zCount {
+        for _ in 0..<zCount { // depth
             var x:CGFloat = edgePosX
-            for column in 0..<xCount {
+            for _ in 0..<xCount { // column
                 
                 let sphereGeometry = SCNSphere(radius: radius)
                 sphereGeometry.name = myIndex.description
@@ -277,7 +277,7 @@ class PrimitivesScene: SCNScene {
     
   }
     
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
   }
 }

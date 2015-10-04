@@ -77,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
                 // probably doesn't have a createPDF() method.  self.createPDF(exportedFileURL)
             }
         } // End block
-        println("save pressed")
+        print("save pressed")
     }
     
     @IBAction func openDocument(sender: AnyObject) {
@@ -144,13 +144,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
         if myField.identifier == "IPADDR_FIELD" {
             if validIPAddress(myField.stringValue) {
                 __prefData.setIPAddr(myField.stringValue)
-                println("Changing ip address field")
+                print("Changing ip address field")
             }
         }
         if myField.identifier == "PORTNR_FIELD" {
             if validPortNr(myField.integerValue) {
                 __prefData.setPortNr(myField.integerValue)
-                println("Changing port number")
+                print("Changing port number")
             }
         }
     }

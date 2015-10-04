@@ -124,9 +124,9 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
         // Open connection to the LED cube
         let established = CubeNetworkObj.openConnection(__prefData.ipAddr(), port: UInt32(__prefData.portNR()))
         if established {
-            println("connection established")
+            print("connection established")
         }else{
-            println("connection failed")
+            print("connection failed")
         }
         __animations.sendFrame()
 
@@ -153,7 +153,7 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        var newAngle = (CGFloat)(20.0)*(CGFloat)(M_PI)/180.0
+        let newAngle = (CGFloat)(20.0)*(CGFloat)(M_PI)/180.0
         //newAngle += currentAngle
 
 //        cameraNode.transform = SCNMatrix4MakeRotation(-0.5, 0, 0, 1)

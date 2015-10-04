@@ -231,7 +231,9 @@
 		ADCB864D1AC6471C00E300C7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Nikolai Rinas";
 				TargetAttributes = {
 					ADCB86541AC6471C00E300C7 = {
@@ -335,6 +337,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -407,6 +410,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Cube4Fun/Poco",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "nikolairinas.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cube4Fun/src/Cube4Fun-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -429,6 +433,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Cube4Fun/Poco",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "nikolairinas.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cube4Fun/src/Cube4Fun-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = /opt/local/include;

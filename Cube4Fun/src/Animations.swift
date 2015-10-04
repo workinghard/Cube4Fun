@@ -206,14 +206,14 @@ class Animations: NSObject {
     
     func addAnimation() {
         _animationArray.append(self.newAnimation())
-        println("append Animation. count: \(_animationArray.count)")
+        print("append Animation. count: \(_animationArray.count)")
     }
     func newAnimation() -> (NSMutableDictionary)  {
-        println("create new animation")
+        print("create new animation")
         return [AnimName: "Animation1", AnimKey: "1=anim1", AnimDuration: 10, AnimSpeed: 500, AnimFrames: self.newFrame()]
     }
     func newFrame() -> (NSMutableData) {
-        println("create new frame")
+        print("create new frame")
         return NSMutableData(bytes: _emptyFrame, length: 64)
     }
     func addFrame() {
@@ -232,18 +232,18 @@ class Animations: NSObject {
         // Insert empty frame at the current position
         
         // Get Array
-        var myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
-        var myDataBytes = self.getAnimDataSelected()
+        let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
+        let myDataBytes = self.getAnimDataSelected()
 
         // Get startPositions of the selected frame
-        var frameStartPos = (self.getAnimationFrameID()-1)*64
+        let frameStartPos = (self.getAnimationFrameID()-1)*64
 
         // Append one empty frame at the end
         self.addFrame()
         
         var lastArrPos: Int = myData.length - 1
-        println("Framestart: \(frameStartPos)")
-        println("Framelength: \(lastArrPos)")
+        print("Framestart: \(frameStartPos)")
+        print("Framelength: \(lastArrPos)")
 
         // copy frames
         while ( lastArrPos >= frameStartPos + 64) {
@@ -260,18 +260,18 @@ class Animations: NSObject {
     
     
     func deleteDisplFrame() {
-        println("delete frame")
+        print("delete frame")
         
         // Get Array
-        var myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
-        var myDataBytes = self.getAnimDataSelected()
+        let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
+        let myDataBytes = self.getAnimDataSelected()
         
         // Get startPositions of the selected frame
         var frameStartPos = (self.getAnimationFrameID()-1)*64
 
-        var lastArrPos: Int = myData.length - 1 - 64
-        println("Framestart: \(frameStartPos)")
-        println("Framelength: \(lastArrPos)")
+        let lastArrPos: Int = myData.length - 1 - 64
+        print("Framestart: \(frameStartPos)")
+        print("Framelength: \(lastArrPos)")
         
         // copy frames (fill deleted frame)
         while ( frameStartPos <= lastArrPos ) {
@@ -352,7 +352,7 @@ class Animations: NSObject {
     
     func setLEDColor(color: UInt8, led: Int) {
         //println("Led pressed: \(led)")
-        var myByte: [UInt8] = [color]
+        let myByte: [UInt8] = [color]
         let myData: NSMutableData = (self.getAnimation(_animationSelected)).objectForKey(AnimFrames) as! NSMutableData
         let bytePosition = NSMakeRange(((self.getAnimationFrameID()-1)*64)+led, 1)
         myData.replaceBytesInRange(bytePosition, withBytes: myByte)

@@ -60,5 +60,5 @@ The application is written in a new apple programming language [Swift](https://d
 
 
 
-[logo]: http://cube4fun.net/public/Cube6-128j.png "Logo"
-[overviewIMG1]: http://cube4fun.net/public/Overview-Pic1.png "Overview"
+[logo]: http://cube4fun.net/images/Cube6-128j.png "Logo"
+[overviewIMG1]: http://cube4fun.net/images/Overview-Pic1.png "Overview"
