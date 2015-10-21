@@ -502,6 +502,7 @@ void checkAnimationSDCard() {
               if (_animationEndPos > _animationStartPos ) { 
                 // Goto next frame 
                 myProjectFile.seek(_animationEndPos);
+                myReadStatus = 0;
               }
             }
             
