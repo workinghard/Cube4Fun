@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CF883724-C063-4471-8038-02D8B5218472</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Cube4Fun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D4F6C3B5ABB37AB601BD47431CEFD45689C87774</key>
+		<string>https://github.com/workinghard/Cube4Fun.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Cube4Fun.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D4F6C3B5ABB37AB601BD47431CEFD45689C87774</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/workinghard/Cube4Fun.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D4F6C3B5ABB37AB601BD47431CEFD45689C87774</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D4F6C3B5ABB37AB601BD47431CEFD45689C87774</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Cube4Fun</string>
+		</dict>
+	</array>
+</dict>
+</plist>
