@@ -140,6 +140,10 @@ class AnimationsController: NSObject, NSTableViewDataSource, NSTableViewDelegate
         myTableView.reloadData()
     }
     
+    @IBAction func importAnimation(sender: AnyObject) {
+        print("Animation import pressed")
+    }
+    
     @IBAction func moveUpItem(send: AnyObject) {
         if ( __animations.getSelectedAnimationID() > 0 ) {
             __animations.moveUpSelected()

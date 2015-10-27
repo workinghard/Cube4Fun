@@ -23,7 +23,7 @@
 + (void) updateFrame: (const unsigned char *) frameSequence count: (UInt32) frameCount;
 + (void) sendBytes: (const unsigned char *) byteBuffer count: (u_int32_t) byteLength;
 //+ (void) initObjects;
-+ (bool) openConnection: (const char *) ipAddress port: (UInt32) port;
++ (bool) openConnection: (const char *) ipAddress port: (UInt32) port passwd: (const char*) myPasswd;
 + (void) closeConnection;
 + (bool) connected;
 @end

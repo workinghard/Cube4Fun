@@ -37,6 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
     @IBOutlet weak var levelInd: NSProgressIndicator!
     @IBOutlet weak var ipAddr: NSTextField!
     @IBOutlet weak var port: NSTextField!
+    @IBOutlet weak var passwd: NSTextField!
     @IBOutlet weak var waitAnim: NSProgressIndicator!
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -48,6 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
         
         port.stringValue = String(__prefData.portNR())
         ipAddr.stringValue = __prefData.ipAddr()
+        passwd.stringValue = String(__prefData.passwdStr())
         if CubeNetworkObj.connected() {
             showConnActive(true)
         }else{
@@ -103,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
         if CubeNetworkObj.connected() {
             CubeNetworkObj.closeConnection()
         }
-        if CubeNetworkObj.openConnection(__prefData.ipAddr(), port: UInt32(__prefData.portNR())) {
+        if CubeNetworkObj.openConnection(__prefData.ipAddr(), port: UInt32(__prefData.portNR()), passwd: __prefData.passwdStr()) {
             showConnActive(true)
         }else{
             showConnActive(false)
@@ -139,6 +141,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
         //^(6553[0-5]|655[0-2]\d|65[0-4]\d\d|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0)$
     }
     
+    func validPasswdStr(myPasswd: String) -> Bool {
+        var valid: Bool = false
+        if myPasswd.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 8 {
+            valid = true
+        }
+        return valid
+    }
+    
     override func controlTextDidChange(obj: NSNotification) {
         let myField: NSTextField = obj.object as! NSTextField
         if myField.identifier == "IPADDR_FIELD" {
@@ -151,6 +161,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
             if validPortNr(myField.integerValue) {
                 __prefData.setPortNr(myField.integerValue)
                 print("Changing port number")
+            }
+        }
+        if myField.identifier == "PASSWD_FIELD" {
+            if validPasswdStr(myField.stringValue) {
+                __prefData.setPasswd(myField.stringValue)
+                print("Changing password")
             }
         }
     }

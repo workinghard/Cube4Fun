@@ -31,7 +31,8 @@
 #include <time.h>       /* time */
 #include <chrono>
 #include "tcpconnector.h"
-#include <string>
+#include <string.h>
+
 
 class CubeNetwork
 {
@@ -40,7 +41,7 @@ public:
     //static void initObjects();
     static void updateFrame(const unsigned char * frameSequence = NULL, unsigned int frameCount = 0);
     static void sendBytes(const unsigned char* byteBuffer = NULL, u_int32_t byteLength=0);
-    static bool openConnection(const char* ipAddr, unsigned int port);
+    static bool openConnection(const char* ipAddr, unsigned int port, const char* myPasswd);
     //static void openConnection();
     static void closeConnection();
 };

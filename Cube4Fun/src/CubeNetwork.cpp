@@ -35,6 +35,7 @@ TCPConnector* connector;
 
 unsigned char buffer3D[64];
 unsigned char receiveBuffer[32];
+char _passwd[8];
 int bytesReceived;
 int i,x;
 unsigned char color;
@@ -119,36 +120,40 @@ void msgCloseFrameStream() {
 
 void msgOpenFrameStream() {
     if (stream) {
-        buffer3D[0] = 'G';
-        buffer3D[1] = 'E';
-        buffer3D[2] = 'T';
-        buffer3D[3] = ' ';
-        buffer3D[4] = '/';
-        buffer3D[5] = '?';
-        buffer3D[6] = 'S';
-        buffer3D[7] = 's';
-        buffer3D[8] = ' ';
-        stream->send(reinterpret_cast<const char*>(buffer3D), 9);
+        char mySendBuffer[18];
+        strlcpy(mySendBuffer, "GET /?Ss", 9);
+        for (int i=8; i<16; i++) {
+            mySendBuffer[i] = _passwd[i-8];
+        }
+        mySendBuffer[16] = ' ';
+        mySendBuffer[17] = '\0';
+        printf("%s\n", mySendBuffer);
+        
+        for (int i=0 ; i<18;i++) {
+            buffer3D[i] = mySendBuffer[i];
+        }
+        stream->send(reinterpret_cast<const char*>(buffer3D), 17);
     }
 }
 
 void msgStartWrite(u_int32_t msgLength) {
+    char mySendBuffer[22];
     unsigned char myBuffer[4];
     byte2uint32(myBuffer, msgLength);
     if (stream) {
-        buffer3D[0] = 'G';
-        buffer3D[1] = 'E';
-        buffer3D[2] = 'T';
-        buffer3D[3] = ' ';
-        buffer3D[4] = '/';
-        buffer3D[5] = '?';
-        buffer3D[6] = 'W';
-        buffer3D[7] = 'w';
-        buffer3D[8] = myBuffer[0];  // int32 to byte array conversion
-        buffer3D[9] = myBuffer[1];
-        buffer3D[10] = myBuffer[2];
-        buffer3D[11] = myBuffer[3];
-        buffer3D[12] = ' ';
+        strlcpy(mySendBuffer, "GET /?Ww", 9);
+        for (int i=8; i<16; i++) {
+            mySendBuffer[i] = _passwd[i-8];
+        }
+        mySendBuffer[16] = myBuffer[0];  // int32 to byte array conversion
+        mySendBuffer[17] = myBuffer[1];
+        mySendBuffer[18] = myBuffer[2];
+        mySendBuffer[19] = myBuffer[3];
+        mySendBuffer[20] = ' ';
+        mySendBuffer[21] = '\0';
+        for (int i=0 ; i<22;i++) {
+            buffer3D[i] = mySendBuffer[i];
+        }
         
         printf("sending Length:\n");
         printf("0: %u\n", myBuffer[0]);
@@ -156,7 +161,7 @@ void msgStartWrite(u_int32_t msgLength) {
         printf("2: %u\n", myBuffer[2]);
         printf("3: %u\n", myBuffer[3]);
         
-        stream->send(reinterpret_cast<const char*>(buffer3D), 13);
+        stream->send(reinterpret_cast<const char*>(buffer3D), 21);
     }
 }
 
@@ -263,17 +268,22 @@ void CubeNetwork::updateFrame(const unsigned char * frameSequence, unsigned int 
     
 }
 
-bool CubeNetwork::openConnection(const char* ipAddr, unsigned int port) {
+bool CubeNetwork::openConnection(const char* ipAddr, unsigned int port, const char* myPasswd) {
     bool connectionEstablished = false;
-    printf("Try to open the connection\n");
     //std::string ipAddr_str(reinterpret_cast<const char*>(ipAddr));
     //Poco::UInt16 portNr = port;
-    connector = new TCPConnector();
-    stream = connector->connect(ipAddr, port, 10); //Connect with 10 seconds timout 
-    if (stream) {
-      msgOpenFrameStream();
-      streamMode = 1;
-      connectionEstablished = true;
+    if ( strlen(myPasswd) == 8 ) {
+        printf("Try to open the connection\n");
+        connector = new TCPConnector();
+        stream = connector->connect(ipAddr, port, 10); //Connect with 10 seconds timout
+        if (stream) {
+            strlcpy(_passwd, myPasswd, 9); // Save password
+            msgOpenFrameStream();
+            streamMode = 1;
+            connectionEstablished = true;
+        }
+    }else{
+        printf("No Password provided\n");
     }
 
     return connectionEstablished;

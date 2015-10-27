@@ -25,9 +25,11 @@ class Preferences: NSObject {
     let _myPrefs: NSUserDefaults = NSUserDefaults()
     var _myIPAddr: String  = String()
     var _myPortNr: Int  = Int()
+    var _myPasswd: String = String()
     
     let ipaddr_txt: String = "IPADDR"
     let portnr_txt: String = "PORTNR"
+    let passwd_txt: String = "PASSWD"
     // ipAddr
     
     
@@ -48,6 +50,10 @@ class Preferences: NSObject {
         if myPort > 0 {
             _myPortNr = myPort
         }
+        // Load Password
+        if let myPasswd: String = _myPrefs.stringForKey(passwd_txt) {
+            _myPasswd = myPasswd
+        }
     }
     
     func saveFile() {
@@ -55,6 +61,8 @@ class Preferences: NSObject {
         _myPrefs.setObject(_myIPAddr, forKey: ipaddr_txt)
         // Save port number
         _myPrefs.setInteger(_myPortNr, forKey: portnr_txt)
+        // Save Password
+        _myPrefs.setObject(_myPasswd, forKey: passwd_txt)
     }
     
     func ipAddr() -> (String) {
@@ -72,6 +80,15 @@ class Preferences: NSObject {
     
     func setPortNr(portNr: Int) {
         _myPortNr = portNr
+        self.saveFile()
+    }
+    
+    func passwdStr() -> (String) {
+        return _myPasswd
+    }
+    
+    func setPasswd(passwdStr: String) {
+        _myPasswd = passwdStr
         self.saveFile()
     }
 }

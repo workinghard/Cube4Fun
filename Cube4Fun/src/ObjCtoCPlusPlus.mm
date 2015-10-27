@@ -39,10 +39,10 @@
     CubeNetwork::sendBytes(byteBuffer, byteLength);
 }
 //+ (void) openConnection
-+ (bool) openConnection: (const char *) ipAddress port: (UInt32) port
++ (bool) openConnection: (const char *) ipAddress port: (UInt32) port passwd:(const char *)myPasswd
 {
     bool success = false;
-    success = CubeNetwork::openConnection(ipAddress, port);
+    success = CubeNetwork::openConnection(ipAddress, port, myPasswd);
     return success;
 }
 + (void) closeConnection

@@ -122,7 +122,7 @@ class GameViewController: NSViewController { // SCNSceneRendererDelegate
 //        myFrames = NSMutableData(bytes: emptyFrame, length: 64)
 //        myFrameCount = 1
         // Open connection to the LED cube
-        let established = CubeNetworkObj.openConnection(__prefData.ipAddr(), port: UInt32(__prefData.portNR()))
+        let established = CubeNetworkObj.openConnection(__prefData.ipAddr(), port: UInt32(__prefData.portNR()), passwd: __prefData.passwdStr())
         if established {
             print("connection established")
         }else{
